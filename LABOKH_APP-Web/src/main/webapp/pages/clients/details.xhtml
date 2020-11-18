@@ -1,0 +1,135 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+	<p:dialog header="Détails Client" widgetVar="dlg1" modal="true"
+		width="60%" resizable="false" responsive="true" style="height:50%">
+		<div id="wrapper">
+			<div id="wrapperIndent">
+				<div class="Responsive100 Container100">
+					<h:panelGroup id="detail">
+						<div class="Container100 White Responsive100">
+							<div class="Container100 White Responsive100">
+
+								<div class="Container25 White Responsive100">
+									<p:outputLabel value="Nombre des points :" />
+								</div>
+								<div class="Container50 White Responsive100">
+									<p:outputLabel value="#{clientsBean.compte.nbPoints}" />
+								</div>
+
+							</div>
+							<div class="Container100 White Responsive100">
+
+								<div class="Container25 White Responsive100">
+									<p:outputLabel value="Numero de Compte :" />
+								</div>
+								<div class="Container50 White Responsive100">
+									<p:outputLabel value="#{clientsBean.compte.NCompt}" />
+								</div>
+							</div>
+							<div class="Container100 White Responsive100">
+
+								<div class="Container25 White Responsive100">
+									<p:outputLabel value="Pack Compte :" />
+								</div>
+								<div class="Container50 White Responsive100">
+									<p:outputLabel value="#{clientsBean.compte.packCompt.typePack}" />
+								</div>
+							</div>
+							<div class="Container100 White Responsive100">
+
+								<div class="Container25 White Responsive100">
+									<p:outputLabel value="Nom et Prénom :" />
+								</div>
+								<div class="Container50 White Responsive100">
+									<p:outputLabel
+										value="#{clientsBean.compte.nom} #{clientsBean.compte.prenom}" />
+								</div>
+							</div>
+						</div>
+						<div class="EmptyBox30 Container100 White Responsive100"></div>
+
+						<div class="Container100 White Responsive100">
+							<p:fieldset legend="Liste des Mouvements">
+								<p:dataTable id="mouvementTb" var="mov" selectionMode="single"
+									selection="#{clientsBean.mouvement}"
+									rowKey="#{mov.idMouvement}"
+									value="#{clientsBean.mouvementFids}" widgetVar="mouvementTable"
+									rows="6" reflow="true" emptyMessage="Aucune Mouvement"
+									paginator="true" paginatorPosition="bottom">
+									<p:ajax event="rowSelect" update=":mainForm:factureDetail"
+										oncomplete="PF('movFacture').show('#{component.clientId}')" />
+									<p:column headerText="Id Mouvement">
+										<h:outputText value="#{mov.idMouvement}" />
+									</p:column>
+									<p:column headerText="Type de de Mouvement">
+										<h:outputText value="#{mov.typeMvt}" />
+									</p:column>
+									<p:column headerText="Date de Mouvement">
+										<h:outputText value="#{mov.date}">
+											<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+										</h:outputText>
+									</p:column>
+									<p:column headerText="Par">
+										<h:outputText
+											value="#{mov.utilisateur.nom} #{mov.utilisateur.prenom}" />
+									</p:column>
+									<p:column headerText="Montant">
+										<h:outputText value=" + #{mov.montant}"
+											rendered="#{mov.typeMvt == 'Facture'}" />
+										<h:outputText value=" - #{mov.montant}"
+											rendered="#{mov.typeMvt == 'Conversion'}" />
+									</p:column>
+									<p:column headerText="Action">
+										<p:commandButton id="Desactiver" icon="fa  fa-close"
+											action="#{clientsBean.DesactiverMouvement()}"
+											update=":mainForm:detail :mainForm:comptTB"
+											title="Afficher détails" process="@this"
+											rendered="#{mov.typeMvt == 'Facture'}">
+											<f:setPropertyActionListener value="#{mov}"
+												target="#{clientsBean.mouvement}" />
+										</p:commandButton>
+									</p:column>
+								</p:dataTable>
+							</p:fieldset>
+						</div>
+
+					</h:panelGroup>
+				</div>
+			</div>
+		</div>
+		<p:overlayPanel widgetVar="movFacture" showEffect="fade"
+			dynamic="true" hideEffect="fade" dismissable="false"
+			showCloseIcon="true" for="mouvementTb" my="top right" at="top right">
+			<p:outputPanel id="factureDetail" style="text-align:center;">
+				<p:panelGrid id="detailFacture" columns="2"
+					rendered="#{clientsBean.mouvement.typeMvt == 'Facture'}">
+
+					<h:outputText value="Numéro Facture" />
+					<h:outputText value="#{clientsBean.mouvement.facture.numFacture}" />
+
+					<h:outputText value="Date de Facture" />
+					<h:outputText value="#{clientsBean.mouvement.facture.dateFacture}" />
+
+					<h:outputText value="Total Prix " />
+					<h:outputText value="#{clientsBean.mouvement.facture.totalPrix} DT" />
+				</p:panelGrid>
+				<p:panelGrid id="detailPack" columns="2"
+					rendered="#{clientsBean.mouvement.typeMvt == 'Conversion'}">
+
+					<h:outputText value="Type Pack Cadeau" />
+					<h:outputText
+						value="#{clientsBean.mouvement.packCadeaux.packCompt.typePack}" />
+
+					<h:outputText value="Valeur" />
+					<h:outputText value="#{clientsBean.mouvement.packCadeaux.valeur}" />
+
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:overlayPanel>
+	</p:dialog>
+
+</ui:composition>

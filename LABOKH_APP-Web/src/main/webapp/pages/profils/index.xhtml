@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+
+		<h:panelGroup id="middleBox">
+
+		</h:panelGroup>
+
+		<div class="Container100">
+			<div class="ContainerIndent">
+				<div class="Card ShadowEffect">
+					<h:form id="fr">
+						<ui:include src="list.xhtml"></ui:include>
+						<p:dialog header="Détails profil" widgetVar="aj" modal="true"
+							width="60%" resizable="false">
+
+
+							<ui:include src="form.xhtml"></ui:include>
+						</p:dialog>
+
+					</h:form>
+					<h:form id="f2">
+						<p:dialog header="Détails profil" widgetVar="dt" modal="true"
+							width="60%" resizable="false">
+							<ui:include src="details.xhtml"></ui:include>
+						</p:dialog>
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			function handleLoginRequest(xhr, status, args) {
+				if (args.validationFailed) {
+					PF('aj').jq.effect("shake", {
+						times : 5
+					}, 100);
+				} else {
+					PF('aj').hide();
+
+				}
+			}
+		</script>
+	</ui:define>
+	<ui:define name="blockRight">
+
+	</ui:define>
+
+</ui:composition>

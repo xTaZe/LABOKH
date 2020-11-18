@@ -1,0 +1,211 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pr="http://primefaces.org/rio">
+
+	<p:dialog header="Mon Profil" widgetVar="dlg" responsive="true" modal="true"
+		width="60%">
+
+		<div id="wrapper">
+			<div id="wrapperIndent">
+				<div class="Responsive100 Container100">
+					<h:panelGroup id="fiche">
+
+						<div class="Container50 White Responsive100">
+							<div class="Container50 White Responsive50">
+								<p:outputLabel value="Nom :" for="nom" />
+							</div>
+							<div class="Container50 White Responsive50">
+
+								<p:inputText id="nom" value="#{accueilFacade.connetedUser.nom}"
+									required="true"
+									requiredMessage="Ce champ est obligatoire : veuillez inscrire votre nom.">
+									<f:validateLength minimum="5" maximum="50" />
+								</p:inputText>
+
+
+							</div>
+							<!-- 							<div class="Container100 White Responsive100"> -->
+							<!-- 								<p:message for="nom" /> -->
+							<!-- 							</div> -->
+						</div>
+						<div class="Container50 White Responsive100">
+							<div class="Container50 White Responsive50">
+								<p:outputLabel value="Prenom : " for="prenom" />
+							</div>
+							<div class="Container50 White Responsive50">
+								<p:inputText id="prenom"
+									value="#{accueilFacade.connetedUser.prenom}" required="true"
+									requiredMessage="Ce champ est obligatoire : veuillez inscrire votre prenom .">
+									<f:validateLength minimum="5" maximum="50" />
+								</p:inputText>
+							</div>
+							<!-- 							<div class="Container100 White Responsive100"> -->
+							<!-- 								<p:message for="prenom" /> -->
+							<!-- 							</div> -->
+						</div>
+					<div class="EmptyBox5 Container100 White Responsive100"></div>
+						<div class="Container50 White Responsive100">
+							<div class="Container50 White Responsive50">
+								<p:outputLabel value="Email :" for="email" />
+							</div>
+							<div class="Container50 White Responsive50">
+								<p:inputText value="#{accueilFacade.connetedUser.email}"
+									required="true"
+									requiredMessage="Ce champ est obligatoire : veuillez inscrire votre adresse courriel."
+									validatorMessage="Veuillez entrer une addresse électronique valide !"
+									id="email">
+									<f:validateRegex
+										pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+								</p:inputText>
+							</div>
+							<!-- 							<div class="Container100 White Responsive100"> -->
+							<!-- 								<p:message for="email" /> -->
+							<!-- 							</div> -->
+						</div>
+						
+						<div class="Container50 White Responsive100">
+							<div class="Container50 White Responsive50">
+								<p:outputLabel value="Login : " for="login" />
+							</div>
+							<div class="Container50 White Responsive50">
+
+								<p:inputText id="login"
+									value="#{accueilFacade.connetedUser.login}"
+									styleClass="no-radius" required="true"
+									requiredMessage="Ce champ est obligatoire : veuillez inscrire votre login.">
+									<f:validateLength minimum="5" maximum="50" />
+								</p:inputText>
+							</div>
+
+							<!-- 							<div class="Container100 White Responsive100"> -->
+							<!-- 								<p:message for="login" /> -->
+							<!-- 							</div> -->
+						</div>
+						<div class="EmptyBox5 Container100 White Responsive100"></div>
+						<div class="Container50 White Responsive100">
+							<div class="Container50 White Responsive50">
+								<p:outputLabel value="téléphone : " for="telephone" />
+							</div>
+							<div class="Container50 White Responsive50">
+
+								<p:inputText id="telephone"
+									value="#{accueilFacade.connetedUser.tel}"
+									styleClass="no-radius" required="true"
+									requiredMessage="Ce champ est obligatoire : veuillez inscrire votre numéro de téléphone .">
+									<f:validateLength minimum="5" maximum="50" />
+								</p:inputText>
+							</div>
+							<!-- 							<div class="Container100 White Responsive100"> -->
+							<!-- 								<p:message for="telephone" /> -->
+							<!-- 							</div> -->
+						</div>
+						
+						<div class="Container50 White Responsive100">
+							<div class="Container50 White Responsive50">
+								<p:outputLabel value="Mot de passe actuel : " for="oldPassword" />
+							</div>
+							<div class="Container50 White Responsive50">
+
+								<p:password id="oldPassword"
+									value="#{accueilFacade.oldPassword}" required="true"
+									requiredMessage="Ce champ est obligatoire : veuillez ajouter un password.">
+									<f:validateLength minimum="5" maximum="50" />
+								</p:password>
+
+
+							</div>
+							<!-- 							<div class="Container100 White Responsive100"> -->
+							<!-- 								<p:message for="oldPassword" /> -->
+							<!-- 							</div> -->
+						</div>
+						<div class="EmptyBox5 Container100 White Responsive100"></div>
+						<div class="Container50 White Responsive100">
+							<div class="Container50 White Responsive50">
+								<p:outputLabel value="Nouveau mot de passe : " for="pwd1" />
+							</div>
+							<div class="Container50 White Responsive50">
+
+								<p:password id="pwd1" value="#{accueilFacade.password}"
+									feedback="false" match="pwd2" label="Password 1"
+									required="true"
+									requiredMessage="Ce champ est obligatoire : veuillez ajouter un password.">
+									<f:validateLength minimum="5" maximum="50" />
+								</p:password>
+							</div>
+							<!-- 							<div class="Container100 White Responsive100"> -->
+							<!-- 								<p:message for="pwd1" /> -->
+							<!-- 							</div> -->
+						</div>
+						
+						<div class="Container50 White Responsive100">
+							<div class="Container50 White Responsive50">
+								<p:outputLabel value="Vérification : " for="pwd2" />
+							</div>
+							<div class="Container50 White Responsive50">
+
+								<p:password id="pwd2" value="#{accueilFacade.password2}"
+									feedback="false" label="Password 2" required="true"
+									requiredMessage="Ce champ est obligatoire : veuillez resaisire le password.">
+									<f:validateLength minimum="5" maximum="50" />
+								</p:password>
+							</div>
+							<!-- 							<div class="Container100 White Responsive100"> -->
+							<!-- 								<p:message for="pwd2" /> -->
+							<!-- 							</div> -->
+						</div>
+						<div class="EmptyBox5 Container100 White Responsive100"></div>
+					</h:panelGroup>
+				</div>
+
+				<p:separator />
+				<div class="Container50 White Responsive100">
+					<p:commandButton id="addLcde" value="Modifier"
+						action="#{accueilFacade.saveProfil()}" process=":mainForm:fiche"
+						update=":mainForm:fiche mainForm:middleBox :mainForm:growl :profilForm:profil"
+						icon="ui-icon-plusthick"
+						onstart="PF('blockUIWidgetfiche').block()"
+						oncomplete="PF('blockUIWidgetfiche').unblock();handleProfilRequest(xhr, status, args);"
+						 />
+
+					<p:commandButton value="Annuler" immediate="true"
+						icon="ui-icon-arrowreturnthick-1-s" update=":profilForm:profil"
+						oncomplete="PF('dlg').hide();" />
+
+
+
+					<pe:blockUI target=":mainForm:fiche" widgetVar="blockUIWidgetfiche">
+						<h:panelGrid columns="2">
+							<h:graphicImage library="imggif" name="ajax-loader.gif"
+								value="ajax-loader1.gif"
+								style="margin-right: 12px; vertical-align: middle;" />
+							<h:outputText value="chargement en en cours..."
+								style="white-space: nowrap;" />
+						</h:panelGrid>
+
+
+					</pe:blockUI>
+
+				</div>
+
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			function handleProfilRequest(xhr, status, args) {
+				if (args.validationFailed) {
+					PF('dlg').jq.effect("shake", {
+						times : 5
+					}, 100);
+				} else {
+					PF('dlg').hide();
+
+				}
+			}
+		</script>
+	</p:dialog>
+</ui:composition>

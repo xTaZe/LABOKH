@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pr="http://primefaces.org/rio">
+
+	<p:dialog header="Envoie Message" widgetVar="dlg" modal="true"
+		width="60%" resizable="false" responsive="true">
+		<div id="wrapper">
+			<div id="wrapperIndent">
+				<div class="Responsive100 Container100">
+					<h:panelGroup id="fiche">
+						<div class="Container100 White Responsive100">
+							<div class="Container50 White Responsive100">
+								<p:outputLabel value="Type :" />
+							</div>
+							<div class="Container50 White Responsive100">
+								<p:selectManyCheckbox id="basic"
+									value="#{clientsBean.selectedOptions}">
+									<f:selectItem itemLabel="Sms" itemValue="Sms" />
+									<f:selectItem itemLabel="Email" itemValue="Email" />
+								</p:selectManyCheckbox>
+							</div>
+							<div class="Container50 White Responsive100">
+								<p:outputLabel value="Envoyé à :" />
+							</div>
+							<div class="Container50 White Responsive100">
+								<p:autoComplete id="comptes" multiple="true"
+									value="#{clientsBean.selectCompteFidelites}" var="compte"
+									itemLabel="#{compte.nom} #{compte.prenom}"
+									itemValue="#{compte}" converter="entityConverter"
+									forceSelection="true" disabled="true">
+									<p:column>
+										<h:outputText value="#{compte.nom} #{compte.prenom}" />
+									</p:column>
+								</p:autoComplete>
+							</div>
+							<div class="Container50 White Responsive100">
+								<p:outputLabel value="Message :" />
+							</div>
+							<div class="Container100 White Responsive100">
+<!-- 								<p:inputTextarea cols="60" rows="5" autoResize="false" -->
+<!-- 									value="#{clientsBean.contenuDeMessage}" /> -->
+								<p:editor autoResize="false"
+									value="#{clientsBean.contenuDeMessage}"></p:editor>
+							</div>
+							<div class="Container50 White Responsive100"></div>
+							<div class="Container100 White Responsive100">
+								<p:commandButton id="envoyerMessage" value="Envoyer"
+									action="#{clientsBean.saveEnregistrement()}"
+									update=":mainForm:fiche :mainForm:comptTB"
+									icon="fa fa-plus-circle"
+									onstart="PF('blockUIWidgetfiche').block()"
+									oncomplete="PF('blockUIWidgetfiche').unblock();handleLoginRequest(xhr, status, args);" />
+
+								<p:commandButton value="Annuler" immediate="true"
+									icon="ui-icon-arrowreturnthick-1-s" onclick="PF('dlg').hide();" />
+							</div>
+						</div>
+					</h:panelGroup>
+				</div>
+			</div>
+		</div>
+	</p:dialog>
+
+</ui:composition>

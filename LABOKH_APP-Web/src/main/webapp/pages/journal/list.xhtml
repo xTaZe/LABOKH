@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+	<div>
+		<p:fieldset legend="Liste des journaux" style="font-size:11px;"
+			id="fiche">
+			<p:dataTable value="#{journalBean.journals}" var="u" rows="10"
+				paginator="true" paginatorPosition="bottom"
+				emptyMessage="Aucun enregistrement trouvé. " widgetVar="table"
+				id="tb" reflow="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15,20">
+
+				<div style="clear: both" />
+
+
+				<p:column headerText="Date dernière connexion" width="100">
+					<h:outputText value="#{u.utilisateur.dateLastLogin}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Adresse IP Serveur">
+					<h:outputText value="#{u.ipprovenance}" />
+				</p:column>
+
+
+				<p:column headerText="Adresse Host ">
+					<h:outputText value="#{u.zl1}" />
+				</p:column>
+				<p:column headerText="Nom Host ">
+					<h:outputText value="#{u.zl2}" />
+				</p:column>
+				<p:column headerText="Type action" styleClass="not-show-at-start">
+					<h:outputText value="#{u.actionDesc}" />
+				</p:column>
+				<p:column headerText="Date Action" styleClass="not-show-at-start">
+					<h:outputText value="#{u.timeaction}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Navigateur Info ">
+					<h:outputText value="#{u.navigateurInfo}" />
+				</p:column>
+				<p:column width="150" headerText="Actions"
+					style="text-align:center;">
+
+
+
+					<p:commandButton icon="fa fa-search"
+						action="#{journalBean.detailsEnregistrement()}"
+						onclick="PF('journaldetail').show();" title="Détail"
+						immediate="true" update=":mainForm:f2:fiche" process="@this">
+						<f:setPropertyActionListener value="#{u}"
+							target="#{journalBean.journal}" />
+					</p:commandButton>
+
+				</p:column>
+			</p:dataTable>
+
+		</p:fieldset>
+
+
+	</div>
+
+</ui:composition>

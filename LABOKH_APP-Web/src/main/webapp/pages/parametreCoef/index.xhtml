@@ -1,0 +1,141 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<ui:define name="content">
+		<div class="Container70 Responsive100">
+			<h:panelGroup id="middleBox">
+				<div class="Container100">
+					<div class="ContainerIndent">
+						<div class="Card ShadowEffect HeiAutoOnMobile">
+
+							<div class="Container100 Responsive100">
+								<h2 class="CardTopic">
+									<i class="icon-google132 Fs20 Fleft MarRight10 OvHidden"></i>
+									CHOIX DE PARAMETRAGE
+								</h2>
+							</div>
+							<div class="Separator"></div>
+							<div class="Container50 Responsive50">
+								<div class="ContainerIndent">
+									<h3>Choisir le type de fonctionnement</h3>
+								</div>
+							</div>
+							<div class="Container50 Responsive50">
+								<div class="ContainerIndent">
+									<p:inputSwitch onLabel="Coefficient Activé"
+										offLabel="Intervalle Activé" id="switchBool"
+										value="#{coefIntervaleBean.coefBool}" styleClass="Fright">
+										<f:ajax event="change"
+											listener="#{coefIntervaleBean.showDialog()}"></f:ajax>
+									</p:inputSwitch>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="ContainerIndent">
+						<h:panelGroup id="COFINT">
+							<h:panelGroup rendered="#{coefIntervaleBean.point.isCoef}">
+								<div class="Card ShadowEffect " style="text-align: left;">
+									<div class="Container100 Responsive100">
+										<h2 class="CardTopic">
+											<i class="icon-google132 Fs20 Fleft MarRight10 OvHidden"></i>
+											PARAMETRAGE COEFFICIENT
+										</h2>
+									</div>
+									<div class="Separator"></div>
+									<div class="Container100 Responsive100">
+										<div class=" Container50 Responsive100">Réglage
+											Coefficient</div>
+										<div class=" Container50 Responsive100">
+											<p:spinner stepFactor="0.1" required="true"
+												requiredMessage="Veuillez saisir le Coefficient"
+												value="#{coefIntervaleBean.point.coef}" />
+											<p:commandButton icon="fa fa-check Fs16"
+												styleClass="WhiteTextButton RaisedButton"
+												action="#{coefIntervaleBean.updateCoef()}"
+												style="float:right" />
+										</div>
+									</div>
+									<!-- 									<p:messages></p:messages> -->
+								</div>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{!coefIntervaleBean.point.isCoef}">
+								<div class="Card ShadowEffect  TexAlCenter">
+									<div class="Container100 Responsive100">
+										<h2 class="CardTopic" style="text-align: left;">
+											<i class="icon-google132 Fs20 Fleft MarRight10 OvHidden"></i>
+											PARAMETRAGE INTERVALLE
+											<h:outputText
+												rendered="#{coefIntervaleBean.testTrouIntervalle}"
+												value="Veuillez vérifier vos intervalles"
+												style="float :right; color : rgb(229, 57, 53)" />
+										</h2>
+
+									</div>
+									<div class="Separator"></div>
+									<div class="Container100 Responsive100">
+										<div class=" Container100 Responsive100">
+											<ui:include src="list.xhtml"></ui:include>
+											<ui:include src="form.xhtml"></ui:include>
+											<!-- 											<ui:include src="details.xhtml"></ui:include> -->
+											<!-- 											<ui:include src="formDyn.xhtml"></ui:include> -->
+										</div>
+									</div>
+								</div>
+							</h:panelGroup>
+						</h:panelGroup>
+					</div>
+				</div>
+
+			</h:panelGroup>
+		</div>
+		<p:dialog id="test" widgetVar="testW" dynamic="true" modal="true"
+			draggable="true" showEffect="fade" hideEffect="explode">
+			<f:facet name="header">  
+            Vous êtes sur le point de changer le type de fonctionnement des points de fidélité  
+         </f:facet>
+			<div class="Container100 Responsive100 Fright">
+				<p:commandButton value="Confirmer" styleClass="Fright"
+					action="#{coefIntervaleBean.editerTypeDePArametre()}"
+					onstart="PF('blockUIWidgetfiche').block()" immediate="true"
+					oncomplete="PF('blockUIWidgetfiche').unblock();PF('testW').hide();" />
+				<p:commandButton value="Annuler" styleClass="Fright"
+					action="#{coefIntervaleBean.initBoolean()}"
+					update="mainForm:switchBool" process="@this"
+					onstart="PF('blockUIWidgetfiche').block()"
+					oncomplete="PF('blockUIWidgetfiche').unblock();PF('testW').hide();" />
+			</div>
+		</p:dialog>
+		<pe:blockUI target="
+         :mainForm"
+			widgetVar="blockUIWidgetfiche">
+			<h:panelGrid columns="2">
+				<h:graphicImage library="imggif" name="ajax-loader.gif"
+					value="ajax-loader1.gif"
+					style="margin-right: 12px; vertical-align: middle;" />
+				<h:outputText value="chargement en en cours..."
+					style="white-space: nowrap;" />
+			</h:panelGrid>
+		</pe:blockUI>
+
+		<script type="text/javascript">
+			function handleLoginRequest(xhr, status, args) {
+				if (args.validationFailed) {
+					PF('PCAjout').jq.effect("shake", {
+						times : 5
+					}, 100);
+				} else {
+					PF('PCAjout').hide();
+
+				}
+			}
+		</script>
+	</ui:define>
+</ui:composition>
+

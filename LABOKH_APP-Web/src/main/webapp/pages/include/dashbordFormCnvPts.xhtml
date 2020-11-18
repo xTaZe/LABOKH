@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pr="http://primefaces.org/rio">
+
+
+
+	<div class="Responsive100 Container100">
+		<h:panelGroup id="dashficheCnv">
+			<ui:include src="/pages/include/ficheCarte.xhtml"></ui:include>
+			<p:fieldset legend="Pack cadeau">
+				<div class="Container100 White Responsive100">
+					<div class="Container33 White Responsive50">
+						<p:outputLabel value="PackFid :" />
+					</div>
+					<div class="Container50 White Responsive50">
+						<p:selectOneMenu id="packCadCombo"
+							value="#{mouvementUserBean.packCadeaux}"
+							converter="entityConverter" effect="fade" var="t" filter="true"
+							filterMatchMode="startsWith" required="true"
+							styleClass="Container70 Responsive100"
+							requiredMessage="Ce champ est obligatoire : veuillez sélectionner un pack Cadeau.">
+							<f:selectItem itemLabel="..." itemValue="" size="25"
+								noSelectionOption="true" />
+							<f:selectItems value="#{mouvementUserBean.packCadeauxs}" var="p"
+								itemLabel="#{p.valeur}" itemValue="#{p}" />
+							<p:column>
+								<p:graphicImage
+									value="#{mouvementUserBean.PATH_TO_READ}#{t.pathImg}"
+									id="logoImg" cache="false" width="100"/>
+							</p:column>
+							<p:column style="width:20%">
+								<p:outputLabel styleClass="Green Fs16 FontRobotoBold"
+									value="#{t.valeur} " />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{t.decription}" />
+							</p:column>
+
+						</p:selectOneMenu>
+					</div>
+				</div>
+
+				<div class="EmptyBox30 Container100 Responsive100"></div>
+			</p:fieldset>
+
+		</h:panelGroup>
+	</div>
+
+	<p:separator />
+	<div class="EmptyBox30 Container100  Responsive100"></div>
+	<div class="Container100 White Responsive100 ">
+
+		<p:commandButton value=" Créer "
+			action="#{mouvementUserBean.saveConversion()}"
+			update=":mainForm:middleBox :mainForm:dashficheCnv :mainForm:growl :bRightForm:CarteFidRight"
+			icon="ui-icon-plusthick" styleClass="Fright Fs18" />
+
+
+
+
+		<pe:blockUI target=":mainForm:dashficheCnv"
+			widgetVar="blockUIWidgetdashficheCnv">
+			<h:panelGrid columns="2">
+				<h:graphicImage library="imggif" name="ajax-loader.gif"
+					value="ajax-loader1.gif"
+					style="margin-right: 12px; vertical-align: middle;" />
+				<h:outputText value="chargement en en cours..."
+					style="white-space: nowrap;" />
+			</h:panelGrid>
+		</pe:blockUI>
+
+	</div>
+	<div class="EmptyBox20 Container100 White Responsive100"></div>
+
+
+
+
+</ui:composition>

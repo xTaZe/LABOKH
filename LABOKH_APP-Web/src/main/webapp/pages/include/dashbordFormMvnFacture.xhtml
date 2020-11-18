@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pr="http://primefaces.org/rio">
+
+
+	<div class="Responsive100 Container100">
+		<h:panelGroup id="dashficheRendered">
+			<div class="Container100 White Responsive100">
+				<div class="EmptyBox30 Container100 White Responsive100"></div>
+
+				<div class="Container33 White Responsive50">
+					<p:outputLabel value="Veuillez choisir l'entrée:" />
+				</div>
+				<div class="Container50 White Responsive50">
+					<p:selectOneMenu id="car" value="#{mouvementUserBean.renderedBox}"
+						style="width:100%">
+						<f:selectItem itemLabel="Sélectionner une opération" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="Facture" itemValue="FACT" />
+						<f:selectItem itemLabel="Ordre de Réparation" itemValue="OR" />
+						<f:selectItem itemLabel="Commande CVC" itemValue="CVC" />
+						<f:ajax listener="#{mouvementUserBean.ajaxListener}"
+							render=" :mainForm:dashficheOR :mainForm:dashficheCVC :mainForm:dashficheFact" />
+					</p:selectOneMenu>
+					<!-- 					<p:multiSelectListbox value="#{mouvementUserBean.renderedBox}" -->
+					<!-- 						effect="slide" header="Categories" showHeaders="true" -->
+					<!-- 						valueChangeListener="#{mouvementUserBean.ajaxListener}"> -->
+					<!-- 						<f:selectItems value="#{mouvementUserBean.listRenderBox}" /> -->
+
+					<!-- 					</p:multiSelectListbox> -->
+					<!-- 					<p:selectOneButton value="#{mouvementUserBean.renderedBox}"> -->
+					<!-- 						<f:selectItem itemLabel="FACTURE" itemValue="FACT" /> -->
+					<!-- 						<f:selectItem itemLabel="ORDRE DE REPATATION" itemValue="OR" /> -->
+					<!-- 						<f:selectItem itemLabel="CVC" itemValue="CVC" /> -->
+					<!-- 					</p:selectOneButton> -->
+				</div>
+			</div>
+			<div class="EmptyBox5 Container100 White Responsive100"></div>
+			<div class="EmptyBox30 Container100 White Responsive100"></div>
+			<div class="Container100 White Responsive100 ">
+				<p:commandButton value="Valider Sélection" process="@this"
+					action="#{mouvementUserBean.refresh}"
+					update=":mainForm:middleBox :mainForm:dashficheOR :mainForm:dashficheCVC :mainForm:dashficheFact :bRightForm:CarteFidRight"
+					icon="fa fa-plus-circle" styleClass="Fright Fs18" />
+			</div>
+		</h:panelGroup>
+	</div>
+	<p:separator />
+	<h:panelGroup rendered="#{mouvementUserBean.renderedBox eq 'FACT'}">
+		<ui:include src="formFacture.xhtml"></ui:include>
+	</h:panelGroup>
+	<h:panelGroup rendered="#{mouvementUserBean.renderedBox eq 'CVC'}">
+		<ui:include src="formCVC.xhtml"></ui:include>
+	</h:panelGroup>
+	<h:panelGroup rendered="#{mouvementUserBean.renderedBox eq 'OR'}">
+		<ui:include src="formOR.xhtml"></ui:include>
+	</h:panelGroup>
+
+</ui:composition>

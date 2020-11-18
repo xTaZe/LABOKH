@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<p:dialog header="Fiche Marque" widgetVar="MarqueAjout" modal="true"
+		responsive="true" width="20%">
+		<div id="wrapper">
+			<div id="wrapperIndent">
+				<div class="Responsive100 Container100">
+					<h:panelGroup id="MGADD">
+<p:fieldset legend="Libéllé">
+						<div class="Container100 Responsive100">
+							
+								<p:inputText id="ednom" value="#{marquesBean.marque.libelle}"
+									placeholder="Libéllé Marque..." required="true"
+									requiredMessage="Veuillez saisir le nom de la société">
+									<f:validateLength minimum="5" maximum="50" />
+								</p:inputText>
+							
+						</div>
+
+</p:fieldset>
+					</h:panelGroup>
+					<div class="EmptyBox20 Container100 White Responsive100"></div>
+				</div>
+
+				<p:separator />
+				<div class="Container100 Responsive100">
+					<p:commandButton value="Annuler" immediate="true"
+						icon="ui-icon-arrowreturnthick-1-s"
+						onclick="PF('ParamAjout').hide();" styleClass="Fright" />
+					<p:commandButton id="addLcde" value="Enregistrer"
+						action="#{marquesBean.saveEnregistrement()}"
+						update=":mainForm:MGADD :mainForm:growl mainForm:singleDT"
+						icon="ui-icon-plusthick"
+						onstart="PF('blockUIWidgetfiche').block()"
+						oncomplete="PF('blockUIWidgetfiche').unblock();handleLoginRequest(xhr, status, args);"
+						styleClass="Fright" />
+
+
+
+
+					<pe:blockUI target=":mainForm:MGADD" widgetVar="blockUIWidgetfiche">
+						<h:panelGrid columns="2">
+							<h:graphicImage library="imggif" name="ajax-loader.gif"
+								value="ajax-loader1.gif"
+								style="margin-right: 12px; vertical-align: middle;" />
+							<h:outputText value="chargement en en cours..."
+								style="white-space: nowrap;" />
+						</h:panelGrid>
+					</pe:blockUI>
+
+				</div>
+
+			</div>
+		</div>
+	</p:dialog>
+</ui:composition>
+
+malmo/gybl
+malmo/blsl
+malmo/gd (or)

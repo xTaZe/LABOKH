@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pr="http://primefaces.org/rio">
+
+	<p:dialog widgetVar="dlgFact" id="dialogFACTURE" responsive="true"
+		modal="true" width="60%">
+		<h:panelGroup id="DLGFACTURE">
+			<div class="Responsive100 Container100">
+				<h:panelGroup id="ficheFact">
+					<p:fieldset legend="Nouvelle facture">
+						<div class="Container100 White Responsive100">
+							<div class="Container33 White Responsive50">
+								<p:outputLabel value="N° de facture :" />
+							</div>
+							<div class="Container50 White Responsive50">
+								<p:inputText value="#{mouvementUserBean.facture.numFacture}"
+									styleClass="Container70" required="true"
+									disabled="#{mouvementUserBean.factureTrouve}"
+									requiredMessage="Veuillez saisir le numéro de la facture.">
+									<f:validateLength minimum="3" maximum="50" />
+								</p:inputText>
+							</div>
+						</div>
+						<div class="EmptyBox5 Container100 White Responsive100"></div>
+						<h:panelGroup rendered="#{mouvementUserBean.factureTrouve}">
+							<div class="Container100 White Responsive100">
+								<div class="Container33 White Responsive50">
+									<p:outputLabel value="Prix total :" />
+								</div>
+								<div class="Container50 White Responsive50">
+									<p:inputText id="dashTotalPrix"
+										value="#{mouvementUserBean.facture.totalPrix} Dt"
+										styleClass="Container70" disabled="true"
+										requiredMessage="Ce champ est obligatoire : vous devez ajouter le montant totat de la facture"
+										validatorMessage="Ce champ doit être numérique">
+										<f:validateDoubleRange minimum="0.0" maximum="10000000000.999"
+											for="dashTotalPrix" />
+									</p:inputText>
+
+								</div>
+							</div>
+
+							<div class="EmptyBox5 Container100 White Responsive100"></div>
+							<div class="Container100 White Responsive100">
+								<div class="Container33 White Responsive50">
+									<p:outputLabel value="Date de facturation :" />
+								</div>
+								<div class="Container50 White Responsive50">
+									<p:calendar value="#{mouvementUserBean.facture.dateFacture}"
+										styleClass="Container70" size="50" disabled="true" />
+								</div>
+							</div>
+						</h:panelGroup>
+
+
+						<div class="EmptyBox30 Container100 White Responsive100"></div>
+					</p:fieldset>
+				</h:panelGroup>
+			</div>
+
+			<p:separator />
+			<div class="EmptyBox30 Container100 White Responsive100"></div>
+			<div class="Container100 White Responsive100 ">
+				<h:panelGroup id="ficheFactButton">
+					<p:commandButton value=" Créer"
+						rendered="#{mouvementUserBean.factureTrouve}"
+						action="#{mouvementUserBean.saveAjoutFacture}"
+						update=":mainForm:middleBox :mainForm:growl :bRightForm:CarteFidRight"
+						icon="fa fa-plus-circle" styleClass="Fright Fs18"
+						oncomplete="handleRequest(xhr, status, args);" />
+					<p:commandButton value="Rechercher Facture"
+						rendered="#{!mouvementUserBean.factureTrouve}"
+						action="#{mouvementUserBean.rechercherFacture()}"
+						update=":mainForm:middleBox :fact:ficheFactButton :fact:ficheFact :mainForm:growl"
+						icon="fa fa-search" styleClass="Fright Fs18" />
+
+				</h:panelGroup>
+				<pe:blockUI target=":fact:ficheFact"
+					widgetVar="blockUIWidgetficheFact">
+					<h:panelGrid columns="2">
+						<h:graphicImage library="imggif" name="ajax-loader.gif"
+							value="ajax-loader1.gif"
+							style="margin-right: 12px; vertical-align: middle;" />
+						<h:outputText value="chargement en en cours..."
+							style="white-space: nowrap;" />
+					</h:panelGrid>
+				</pe:blockUI>
+
+			</div>
+			<div class="EmptyBox20 Container100 White Responsive100"></div>
+			<script type="text/javascript">
+				function handleRequest(xhr, status, args) {
+					if (args.validationFailed) {
+						PF('dlgFact').jq.effect("shake", {
+							times : 5
+						}, 100);
+					} else {
+						PF('dlgFact').hide();
+
+					}
+				}
+			</script>
+		</h:panelGroup>
+	</p:dialog>
+</ui:composition>

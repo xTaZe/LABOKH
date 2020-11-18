@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+	<div>
+		<h:panelGroup>
+			<p:fieldset legend="Fiche profil" style="font-size:11px;" id="fic">
+				<h:panelGroup>
+					<div class="EmptyBox20 Container100 Responsive100"></div>
+					<div class="Container100 Responsive100">
+						<div class="Container100 Responsive100">
+							<div class="Container25 Responsive100">
+
+								<p:outputLabel value="libellé : " styleClass="my-label-gs" />
+							</div>
+							<p:outputLabel value="#{profilBean.profil.codProfil}" />
+						</div>
+						<div class="Container100 Responsive100">
+							<div class="Container25 Responsive100">
+
+								<p:outputLabel value="Description : " styleClass="my-label-gs" />
+							</div>
+							<p:outputLabel value="#{profilBean.profil.desProfil}" />
+						</div>
+					</div>
+				</h:panelGroup>
+				<div class="EmptyBox30 Container100 Responsive100"></div>
+
+				<p:commandButton value="Annuler" icon="ui-icon-arrowreturnthick-1-s"
+					immediate="true" onclick="PF('dlg2').hide();" />
+			</p:fieldset>
+		</h:panelGroup>
+
+	</div>
+
+</ui:composition>

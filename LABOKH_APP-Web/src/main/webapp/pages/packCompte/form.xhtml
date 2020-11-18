@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<p:dialog header="Ajouter Pack Fidélité" widgetVar="PCAjout"
+		modal="true" responsive="true" width="60%">
+		<div id="wrapper">
+			<div id="wrapperIndent">
+				<div class="Responsive100 Container100">
+					<h:panelGroup id="PGADD">
+
+						<div class="Container100 White Responsive100">
+							<div class="Container50 White Responsive50">
+								<p:outputLabel for="description" value="Description Pack" />
+							</div>
+							<div class="Container50 White Responsive50">
+								<p:inputText id="description" styleClass="Container80"
+									value="#{packCompteBean.packCompt.typePack}"
+									placeholder="Description..." required="true"
+									requiredMessage="Veuillez saisir la description...">
+									<f:validateLength minimum="1" maximum="50" />
+								</p:inputText>
+							</div>
+						</div>
+
+						<div class="EmptyBox20 Container100 White Responsive100"></div>
+					</h:panelGroup>
+				</div>
+				<p:separator />
+				<div class="Container100 White Responsive100">
+					<p:commandButton id="addLcde" value="Enregistrer"
+						action="#{packCompteBean.saveEnregistrement()}"
+						update=":mainForm:PGADD :mainForm:growl mainForm:singleDT"
+						icon="ui-icon-plusthick"
+						onstart="PF('blockUIWidgetfiche').block()"
+						oncomplete="PF('blockUIWidgetfiche').unblock();handleLoginRequest(xhr, status, args);" />
+
+					<p:commandButton value="Annuler" immediate="true"
+						icon="ui-icon-arrowreturnthick-1-s"
+						onclick="PF('PCAjout').hide();" />
+					<pe:blockUI target=":mainForm:PGADD" widgetVar="blockUIWidgetfiche">
+						<h:panelGrid columns="2">
+							<h:graphicImage library="imggif" name="ajax-loader.gif"
+								value="ajax-loader1.gif"
+								style="margin-right: 12px; vertical-align: middle;" />
+							<h:outputText value="chargement en en cours..."
+								style="white-space: nowrap;" />
+						</h:panelGrid>
+					</pe:blockUI>
+
+				</div>
+
+			</div>
+		</div>
+	</p:dialog>
+</ui:composition>

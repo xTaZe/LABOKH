@@ -1,0 +1,403 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pr="http://primefaces.org/rio">
+
+	<p:dialog header="Détails Compte de fidélité" widgetVar="dlg"
+		modal="true" width="70%" resizable="false" responsive="true">
+		<p:scrollPanel mode="native" style="max-height: 28em;">
+			<div id="wrapper">
+				<div id="wrapperIndent">
+					<div class="Responsive100 Container100">
+						<h:panelGroup id="fiche">
+							<p:accordionPanel id="tabCpteFid" multiple="true"
+								activeIndex="0,1,2,3,4" dynamic="true">
+								<p:tab title="Compte Fidélité">
+									<div class="Containe100 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<div class="Container50 White Responsive100">
+												<p:outputLabel value="Type Pack *" />
+											</div>
+											<div class="Container50 White Responsive100">
+												<p:selectOneMenu id="packCombo" style="width:70%"
+													value="#{compteFidBean.compte.packCompt}"
+													converter="entityConverter" effect="fade" var="t"
+													filter="true" filterMatchMode="startsWith" required="true"
+													requiredMessage="Type pack est obligatoire."
+													styleClass="no-radius">
+													<f:selectItem itemLabel="..." itemValue=""
+														noSelectionOption="true" />
+													<f:selectItems value="#{compteFidBean.packCompts}" var="pc"
+														itemLabel="#{pc.typePack}" itemValue="#{pc}" />
+													<p:column>  
+					               							#{t.typePack} 					  
+					           						</p:column>
+												</p:selectOneMenu>
+											</div>
+										</div>
+										<div class="Container50 White Responsive100">
+											<div class="Container50 White Responsive100">
+												<p:outputLabel value="Numero Compte *" />
+											</div>
+											<div class="Container50 White Responsive100">
+												<p:inputText value="#{compteFidBean.compte.NCompt}"
+													style="width:83%" required="true"
+													onkeypress="if (event.keyCode == 13) { return false; }"
+													requiredMessage="Numéro de compte est obligatoire.">
+													<f:validateLength minimum="1" maximum="50" />
+												</p:inputText>
+											</div>
+										</div>
+									</div>
+									<div class="Container100 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<div class="Container50 White Responsive100">
+												<p:outputLabel value="Parrain" />
+											</div>
+											<div class="Container50 White Responsive100">
+
+												<p:selectOneMenu id="parrain" style="width:70%"
+													value="#{compteFidBean.compte.parrain}"
+													converter="entityConverter" effect="fade" var="t"
+													filter="true" filterMatchMode="contains"
+													styleClass="no-radius">
+													<f:selectItem itemLabel="..." itemValue=""
+														noSelectionOption="true" />
+													<f:selectItems value="#{compteFidBean.compteFidelites}"
+														var="pc" itemLabel="#{pc.nom} #{pc.prenom}"
+														itemValue="#{pc}" />
+													<p:column>  
+					               							#{t.nom} #{t.prenom} 				  
+					           						</p:column>
+												</p:selectOneMenu>
+											</div>
+										</div>
+										<div class="Container50 White Responsive100">
+											<div class="Container50 White Responsive100">
+												<p:outputLabel value="Chef de Park" />
+											</div>
+											<div class="Container50 White Responsive100">
+
+												<p:selectOneMenu id="chefdepark" style="width:70%"
+													value="#{compteFidBean.compte.chefDePark}"
+													converter="entityConverter" effect="fade" var="t"
+													filter="true" filterMatchMode="contains"
+													styleClass="no-radius">
+													<f:selectItem itemLabel="..." itemValue=""
+														noSelectionOption="true" />
+													<f:selectItems value="#{compteFidBean.compteFidelites}"
+														var="pc" itemLabel="#{pc.nom} #{pc.prenom}"
+														itemValue="#{pc}" />
+													<p:column>  
+					               							#{t.nom} #{t.prenom} 				  
+					           						</p:column>
+												</p:selectOneMenu>
+											</div>
+										</div>
+									</div>
+								</p:tab>
+								<p:tab title="Données Personnelles">
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="Nom *" />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:inputText value="#{compteFidBean.compte.nom}"
+												style="width:83%"
+												validatorMessage="Veuillez saisir un nom valide."
+												required="true" requiredMessage="Nom est obligatoire.">
+												<f:validateLength minimum="1" maximum="50" />
+												<f:validateRegex pattern="^\p{L}+(?: \p{L}+)*$" />
+											</p:inputText>
+										</div>
+									</div>
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="Prénom *" />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:inputText value="#{compteFidBean.compte.prenom}"
+												style="width:83%"
+												validatorMessage="Veuillez saisir un prénom valide."
+												required="true" requiredMessage="Prénom est obligatoire.">
+												<f:validateLength minimum="1" maximum="50" />
+												<f:validateRegex pattern="^\p{L}+(?: \p{L}+)*$" />
+											</p:inputText>
+										</div>
+									</div>
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="Fonction " />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:inputText value="#{compteFidBean.compte.fonction}"
+												style="width:83%"
+												validatorMessage="Veuillez saisir une fonction valide.">
+												<f:validateLength minimum="1" maximum="50" />
+												<f:validateRegex pattern="^\p{L}+(?: \p{L}+)*$" />
+											</p:inputText>
+										</div>
+									</div>
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="Email *" />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:inputText value="#{compteFidBean.compte.email}"
+												style="width:83%"
+												validatorMessage="Veuillez entrer un email valide !">
+												<f:validateRegex
+													pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+												<f:validateLength minimum="1" maximum="50" />
+											</p:inputText>
+										</div>
+									</div>
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="Portable *" />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:inputText value="#{compteFidBean.compte.portable}"
+												style="width:83%"
+												validatorMessage="Veuillez saisir un numéro de portable valide."
+												required="true" requiredMessage="Portable est obligatoire."
+												maxlength="13">
+												<f:validateRegex
+													pattern="((\+|00)216)?([2579][0-9]{7}|(3[012]|4[01]|8[0128])[0-9]{6}|42[16][0-9]{5})" />
+											</p:inputText>
+										</div>
+									</div>
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="CIN" />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:inputText value="#{compteFidBean.compte.cin}"
+												style="width:83%"
+												validatorMessage="Veuillez saisir un numéro de portable valide."
+												required="false" requiredMessage="Portable est obligatoire."
+												maxlength="13">
+											</p:inputText>
+										</div>
+									</div>
+								</p:tab>
+								<p:tab title="Entreprise">
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="Entreprise 1" />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:autoComplete id="entrerpise1"
+												value="#{compteFidBean.compte.entreprise1}"
+												style="width:83%"
+												completeMethod="#{compteFidBean.findByEntreprise}"
+												required="false"
+												requiredMessage="Entreprise est obligatoire.">
+												<p:ajax event="itemSelect"
+													listener="#{compteFidBean.selectedEntreprise}"
+													update="mainForm:tabCpteFid:mfEntreprise mainForm:tabCpteFid:adresse mainForm:tabCpteFid:emailEntreprise" />
+												<f:validateLength minimum="1" maximum="50" />
+											</p:autoComplete>
+										</div>
+									</div>
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="Email" />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:inputText id="emailEntreprise"
+												value="#{compteFidBean.compte.emailEntreprise}"
+												required="false"
+												requiredMessage="Email Entreprise est obligatoire."
+												validatorMessage="Veuillez entrer un email entreprise valide !"
+												style="width:83%">
+												<f:validateRegex
+													pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+												<f:validateLength minimum="1" maximum="50" />
+											</p:inputText>
+										</div>
+									</div>
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="Entreprise 2" />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:inputText value="#{compteFidBean.compte.entreprise2}"
+												style="width:83%" />
+										</div>
+									</div>
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="Matricule Fiscale" />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:inputText id="mfEntreprise"
+												value="#{compteFidBean.compte.mfEntreprise}"
+												required="false" style="width:83%"
+												validatorMessage="Veuillez saisir un numéro de portable avec minimum 8 chiffres"
+												requiredMessage="Matricule est obligatoire.">
+												<f:validateLength minimum="8" maximum="50" />
+											</p:inputText>
+										</div>
+									</div>
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="Adresse" />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:inputText
+												value="#{compteFidBean.compte.adresseEntreprise}"
+												style="width:83%" required="false" id="adresse"
+												requiredMessage="Adresse est obligatoire.">
+												<f:validateLength minimum="1" maximum="50" />
+											</p:inputText>
+										</div>
+									</div>
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="Téléphone" />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:inputText value="#{compteFidBean.compte.numTelEntreprise}"
+												style="width:83%" required="false" id="numTelEntreprise"
+												requiredMessage="Adresse est obligatoire.">
+												<f:validateLength minimum="1" maximum="50" />
+											</p:inputText>
+										</div>
+									</div>
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="Fax" />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:inputText value="#{compteFidBean.compte.numFaxEntreprise}"
+												style="width:83%" required="false" id="numFaxEntreprise"
+												requiredMessage="Adresse est obligatoire.">
+												<f:validateLength minimum="1" maximum="50" />
+											</p:inputText>
+										</div>
+									</div>
+								</p:tab>
+								<p:tab title="Détails Voiture">
+									<h:panelGroup
+										rendered="#{!empty compteFidBean.compte.marque_1}">
+										<div class="Container50 White Responsive100">
+											<div class="Container50 White Responsive100">
+												<p:outputLabel value="Marque *" />
+											</div>
+											<div class="Container50 White Responsive100">
+												<p:inputText value="#{compteFidBean.compte.marque_1}"
+													style="width:83%" required="true"
+													disabled="#{!empty compteFidBean.compte.marque_1}"
+													requiredMessage="Marque est obligatoire.">
+													<f:validateLength minimum="1" maximum="50" />
+												</p:inputText>
+											</div>
+										</div>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{empty compteFidBean.compte.marque_1}">
+										<div class="Container50 White Responsive100">
+											<div class="Container50 White Responsive100">
+												<p:outputLabel value="Marque *" />
+											</div>
+											<div class="Container50 White Responsive100">
+												<p:selectOneMenu id="marque" style="width:105px "
+													value="#{compteFidBean.compte.marque}"
+													converter="entityConverter" effect="fade" var="t"
+													filter="true" filterMatchMode="startsWith" required="false"
+													requiredMessage="Ce champ est obligatoire : veuillez sélectionner la marque.">
+													<f:selectItem itemLabel="..." itemValue="" size="25"
+														noSelectionOption="true" />
+													<f:selectItems value="#{compteFidBean.listMarques}" var="p"
+														itemLabel="#{p.libelle}" itemValue="#{p}" />
+													<p:column>  
+					               				#{t.libelle}  
+					           					</p:column>
+												</p:selectOneMenu>
+											</div>
+										</div>
+									</h:panelGroup>
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="Modèle *" />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:inputText value="#{compteFidBean.compte.modele}"
+												style="width:83%" required="true"
+												requiredMessage="Model est obligatoire.">
+												<f:validateLength minimum="1" maximum="50" />
+											</p:inputText>
+										</div>
+									</div>
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="Date de Circulation *" />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:calendar id="date" value="#{compteFidBean.compte.datePmc}"
+												size="20" navigator="true" required="true"
+												requiredMessage="Date de circulation est obligatoire.">
+												<f:validateLength minimum="1" maximum="50" />
+											</p:calendar>
+										</div>
+									</div>
+									<div class="Container50 White Responsive100">
+										<div class="Container50 White Responsive100">
+											<p:outputLabel value="Numéro de châssis *" />
+										</div>
+										<div class="Container50 White Responsive100">
+											<p:inputText value="#{compteFidBean.compte.numChassis}"
+												required="true" style="width:83%"
+												requiredMessage="Numéro de châssis est obligatoire."
+												validatorMessage="Veuillez saisir un numéro de châssis valide.">
+												<f:validateLength minimum="17" maximum="17" />
+											</p:inputText>
+										</div>
+									</div>
+								</p:tab>
+							</p:accordionPanel>
+							<p:separator />
+							<div class="Container100 White Responsive100">
+								<p:messages id="messages" showDetail="false" autoUpdate="true"
+									closable="true" />
+							</div>
+							<div class="Container100 White Responsive100 Fright">
+
+								<p:commandButton id="addCompte" value="Modifier"
+									action="#{compteFidBean.saveEnregistrement()}"
+									update=":mainForm:fiche :mainForm:messages :mainForm:comptTB"
+									icon="fa fa-plus-circle" rendered="#{compteFidBean.modModif}"
+									onstart="PF('blockUIWidgetfiche').block()"
+									oncomplete="PF('blockUIWidgetfiche').unblock();handleLoginRequest(xhr, status, args);" />
+
+								<p:commandButton id="modifierCompte" value="Enregistrer"
+									action="#{compteFidBean.saveEnregistrement()}"
+									update=":mainForm:fiche :mainForm:messages :mainForm:comptTB"
+									icon="fa fa-plus-circle" rendered="#{!compteFidBean.modModif}"
+									onstart="PF('blockUIWidgetfiche').block()"
+									oncomplete="PF('blockUIWidgetfiche').unblock();handleLoginRequest(xhr, status, args);" />
+
+								<p:commandButton value="Annuler" immediate="true"
+									icon="ui-icon-arrowreturnthick-1-s" onclick="PF('dlg').hide();" />
+								<pe:blockUI target=":mainForm:fiche"
+									widgetVar="blockUIWidgetfiche">
+									<h:panelGrid columns="2">
+										<h:graphicImage library="imggif" name="ajax-loader.gif"
+											value="ajax-loader1.gif"
+											style="margin-right: 12px; vertical-align: middle;" />
+										<h:outputText value="chargement en en cours..."
+											style="white-space: nowrap;" />
+									</h:panelGrid>
+								</pe:blockUI>
+							</div>
+						</h:panelGroup>
+					</div>
+				</div>
+			</div>
+		</p:scrollPanel>
+	</p:dialog>
+
+</ui:composition>

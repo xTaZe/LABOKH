@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+	</f:facet>
+	<title>FIDCARTE</title>
+	<ui:insert name="head" />
+</h:head>
+
+<h:body styleClass="loginbodyblue">
+	<div class="Wid90 DispBlock MarAuto MarTopPerc5 TexAlCenter">
+		<div class="Wid33 MarAuto WidAutoOnMobile">
+			<h:graphicImage name="images/logoItalCarFid2.svg" library="rio-layout"
+				style="width:100%; max-width:400px;" />
+			<div class="EmptyBox30"></div>
+			<div class="Card ShadowEffect">
+				<h:form prependId="false" id="loginForm"
+					onsubmit="document.#{p:component('loginForm')}.action='j_spring_security_check';">
+					<div class="EmptyBox20"></div>
+					<div class="Wid100 OvHidden BigTopic Fs30">
+						<i class="icon-users Fs40"></i> Authentification
+					</div>
+					<div class="EmptyBox20"></div>
+					<div class="Wid100">
+						<p:inputText name="j_username" id="j_username" placeholder="Login"
+							styleClass="Wid80 TexAlCenter Fs18" />
+					</div>
+					<div class="EmptyBox10"></div>
+					<div class="Wid100">
+						<p:inputText type="password" id="j_password" name="j_password"
+							placeholder="Password" styleClass="Wid80 TexAlCenter Fs18" />
+					</div>
+					<div class="EmptyBox30"></div>
+					<c:if test="${param.state=='failure'}">
+						<c:set var="username"
+							value="#{sessionScope.SPRING_SECURITY_LAST_USERNAME}" />
+
+						<div id="j_idt13" class="ui-chkbox ui-widget">
+							<div class="ui-helper-hidden-accessible"></div>
+							<span class="ui-chkbox-label"><h:outputText
+									value="Login ou mot de passe incorrect" style="COLOR: #ff0000;" /></span>
+						</div>
+					</c:if>
+
+					<c:if test="${param.state=='expired'}">
+						<c:set var="username"
+							value="#{sessionScope.SPRING_SECURITY_LAST_USERNAME}" />
+
+						<div id="j_idt13" class="ui-chkbox ui-widget">
+							<div class="ui-helper-hidden-accessible"></div>
+							<span class="ui-chkbox-label"><h:outputText
+									value="Session expiré" style="COLOR: #ff0000;" /></span>
+						</div>
+					</c:if>
+					<div class="EmptyBox10"></div>
+					<div class="Wid100">
+						<p:commandButton
+							onclick="document.#{p:component('loginForm')}.action='j_spring_security_check';"
+							value="S'authentifier" icon="fa fa-sign-in"
+							styleClass="Wid60 Fs18 White RaisedButton" ajax="false" />
+					</div>
+					<!-- 					<h:outputLink value="loginconfirm.jsf" class="text-center"> -->
+					<!-- 												mot passe oublié -->
+					<!-- 			
+								</h:outputLink> -->
+					<div class="EmptyBox10"></div>
+					<div class="Wid100">
+						<p:button value="Mot de passe oublié ?" icon="fa fa-lock"
+							styleClass="RedButton Wid60 Fs18 White RaisedButton"
+							href="loginconfirm.jsf" />
+					</div>
+					<div class="EmptyBox10"></div>
+				</h:form>
+			</div>
+			<div
+				class="Wid100 TexAlCenter MarTop20 Fs14 FontRobotoRegular WhiteBlue">
+				<i class="fa fa-copyright"></i> Groupe ADAMING 2015<br /> All
+				rights reserved.
+			</div>
+		</div>
+	</div>
+	<!-- <div class="Wid90 DispBlock MarAuto MarTopPerc5 TexAlCenter">
+		<div class="Wid33 MarAuto WidAutoOnMobile">
+			<h:graphicImage name="images/logo.svg" library="rio-layout"
+				style="width:40%; max-width:200px;" />
+			<div class="EmptyBox30"></div>
+			<div class="Card ShadowEffect">
+				<form id="login" name='f' action='j_spring_security_check'
+					method='POST'>
+					<div>
+						<input name="j_username" type="text" value=""
+							class="Container80 Fnone MarAuto Fs22" />
+					</div>
+					<br />
+					<div>
+						<input type="password" name="j_password"
+							class="Container80 Fnone MarAuto Fs22" autocomplete="off"
+							onfocus="if (this.value=='password') this.value = ''" />
+					</div>
+					<br />
+					<c:if test="${param.state=='failure'}">
+						<c:set var="username"
+							value="#{sessionScope.SPRING_SECURITY_LAST_USERNAME}" />
+						<h:outputText value="Login ou mot de passe incorrect"
+							style="COLOR: #ff0000;" />
+					</c:if>
+
+					<c:if test="${param.state=='invalidsession'}">
+						<c:set var="username"
+							value="#{sessionScope.SPRING_SECURITY_LAST_USERNAME}" />
+						<h:outputText value="#{mgo['label.login.fail']}"
+							style="COLOR: #ff0000;" />
+					</c:if>
+					<input type="hidden" id="login:loginMsg" name="login:loginMsg"
+						value="" /> <br />
+					<div class="EmptyBox30"></div>
+					<h:commandButton type="submit" value="Log In " icon="ui-icon-disk"
+						class="Container80 Fnone MarAuto Fs22"></h:commandButton>
+
+				</form>
+			</div>
+			<div
+				class="Wid100 TexAlCenter MarTop20 Fs14 FontRobotoRegular WhiteBlue">
+				<i class="fa fa-copyright"></i> PrimeFaces RIO Theme And Layout <br />
+				All rights reserved.
+			</div>
+		</div>
+	</div> -->
+
+	<h:outputStylesheet name="css/core-layout.css" library="rio-layout" />
+	<h:outputStylesheet name="css/animate.css" library="rio-layout" />
+	<h:outputStylesheet name="css/rio-font.css" library="rio-layout" />
+	<h:outputStylesheet name="css/ripple-effect.css" library="rio-layout" />
+	<h:outputStylesheet name="css/font-awesome.css" library="rio-layout" />
+	<h:outputStylesheet name="css/rio-layout.css" library="rio-layout" />
+</h:body>
+
+</html>

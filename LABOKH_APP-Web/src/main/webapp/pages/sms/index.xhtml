@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+  <ui:define name="content">
+		<div class="Container70">
+			<div class="ContainerIndent">
+				<div class="Card ShadowEffect TexAlCenter">
+					<h:form id="middleBox">
+						<ui:include src="list.xhtml"></ui:include>
+
+
+					</h:form>
+					<h:form id="detail">
+						<p:dialog header="Détails SMS " widgetVar="smsdetail"
+							modal="true"  width="60%" resizable="false">
+							<ui:include src="details.xhtml"></ui:include>
+						</p:dialog>
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

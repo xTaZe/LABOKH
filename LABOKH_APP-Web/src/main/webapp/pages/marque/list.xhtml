@@ -1,0 +1,81 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+
+	<p:dataTable id="singleDT" reflow="true"
+		value="#{marquesBean.marques}" var="v" paginator="true" paginatorPosition="bottom"
+		emptyMessage="No records found with given criteria">
+		<f:facet name="header">MARQUES
+<!-- 		  <p:button icon="fa fa-twitter Fs16 White"/> -->
+			<p:commandButton icon="fa fa-plus Fs16 White"
+				styleClass="BlueTextButton RaisedButton" style="float:right"
+				action="#{marquesBean.nouveauEnregistrement()}"
+				update="mainForm:MGADD"
+				oncomplete="PF('MarqueAjout').show()" process="@this" />
+
+		</f:facet>
+		<p:column headerText="Id Marque">
+			<h:outputText value="#{v.idMarque}" />
+		</p:column>
+		<p:column headerText="Libéllé">
+			<h:outputText value="#{v.libelle}" />
+		</p:column>
+		
+		<p:column headerText="Etat">
+			
+		<p:commandButton icon="fa fa-check-square-o Fs16 White" styleClass="GreenButton" disabled="true" rendered="#{v.FActif}"/>
+		<p:commandButton icon="fa fa-times-circle-o Fs16 White" styleClass="RedButton" disabled="true" rendered="#{!v.FActif}"/>
+					
+				
+		</p:column>
+
+		<p:column width="120" headerText="Actions" id="SeanceAction"
+			footerText="Action" style="text-align:center;">
+			<p:commandButton id="Editer" icon="fa  fa-pencil"
+				action="#{marquesBean.editEnregistrement()}"
+				update=":mainForm:MGADD" oncomplete="PF('MarqueAjout').show();"
+				title="Editer" process="@this">
+				<f:setPropertyActionListener value="#{v}"
+					target="#{marquesBean.marque}" />
+			</p:commandButton>
+			
+				<p:commandButton title="DesactiverEtudiant"
+					action="#{marquesBean.deleteEnregistrement()}" immediate="true"
+					icon="fa  fa-check" update=":mainForm:singleDT"
+					rendered="#{!v.FActif}">
+					<p:confirm header="Message de confirmation" icon="fa fa-check" />
+					<f:setPropertyActionListener value="#{v}"
+						target="#{marquesBean.marque}" />
+				</p:commandButton>
+			
+				<p:commandButton title="DesactiverEtudiant"
+					action="#{marquesBean.deleteEnregistrement()}" immediate="true"
+					icon="fa  fa-close" update=":mainForm:singleDT"
+					rendered="#{v.FActif}">
+					<p:confirm header="Message de confirmation" icon="fa fa-check" />
+					<f:setPropertyActionListener value="#{v}"
+						target="#{marquesBean.marque}" />
+				</p:commandButton>
+		
+
+
+		</p:column>
+	</p:dataTable>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+		<f:facet name="message">
+			<h:outputText
+				value="vous êtes sur le point de changer l'état de la 'Marque'  ! &lt;br/&gt;  êtes vous sûr?"
+				escape="false" />
+		</f:facet>
+
+		<p:commandButton value="oui" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+		<p:commandButton value="non" type="button"
+			styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	</p:confirmDialog>
+
+
+</ui:composition>

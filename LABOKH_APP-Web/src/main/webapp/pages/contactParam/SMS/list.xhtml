@@ -1,0 +1,137 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+
+
+	<p:dataTable id="singleDT" reflow="true" rows="5"
+		value="#{smsParametreBean.listSmsParametres}" var="parametre"
+		paginator="true" paginatorPosition="bottom"
+		rowStyleClass="#{parametre.factif eq true ? 'GreenROW' : 'RedROW'}"
+		emptyMessage="No records found with given criteria">
+		<f:facet name="header">PARAMETRE SMS
+<!-- 		  <p:button icon="fa fa-twitter Fs16 White"/> -->
+			<p:commandButton icon="fa fa-plus Fs16 White"
+				styleClass="BlueTextButton RaisedButton" style="float:right"
+				action="#{smsParametreBean.nouveauEnregistrement()}"
+				update="mainForm:PGADD" oncomplete="PF('ParamAjout').show()"
+				process="@this" />
+
+		</f:facet>
+		<p:column headerText="Hôte">
+			<h:outputText value="#{parametre.host}" />
+		</p:column>
+		<p:column headerText="Nom d'utilisateur">
+			<h:outputText value="#{parametre.login}" />
+		</p:column>
+		<p:column headerText="Password">
+			<p:outputLabel>
+				<h:outputText value="#{parametre.passwd}" />
+			</p:outputLabel>
+		</p:column>
+		<p:column headerText="Service">
+			<p:outputLabel>
+				<h:outputText value="#{parametre.service}" />
+			</p:outputLabel>
+		</p:column>
+		<p:column width="100" headerText="Actions" id="ParametreAction"
+			style="text-align:center;">
+			<p:commandButton id="Editer" icon="fa  fa-trash"
+				styleClass="RedButton"
+				action="#{smsParametreBean.deleteEnregistrement()}"
+				update=":mainForm:PGADD" title="Supprimer" process="@this">
+				<f:setPropertyActionListener value="#{parametre}"
+					target="#{smsParametreBean.smsParametre}" />
+				<p:confirm header="Message de confirmation"
+					message="Êtes vous sûr de vouloir supprimer ce paramètre SMS ?"
+					icon="fa fa-check" />
+
+			</p:commandButton>
+
+		</p:column>
+		<p:column>
+			<p:inputSwitch onLabel="Activé" offLabel="Désactivé" id="switchBool"
+				value="#{parametre.factif}">
+				<f:ajax event="change"
+					listener="#{smsParametreBean.showDialog(parametre)}">
+
+				</f:ajax>
+			</p:inputSwitch>
+		</p:column>
+		<!-- 		<p:column headerText="Etat"> -->
+		<!-- 			<p:row rendered="#{parametre.Factif eq true}"> -->
+		<!-- 				<p:column> -->
+		<!-- 					<h:outputText value="Actif" /> -->
+		<!-- 				</p:column> -->
+		<!-- 			</p:row> -->
+		<!-- 			<p:row rendered="#{parametre.Factif eq false}"> -->
+		<!-- 				<p:column> -->
+		<!-- 					<h:outputText value="Inactif" /> -->
+		<!-- 				</p:column> -->
+		<!-- 			</p:row> -->
+		<!-- 		</p:column> -->
+
+		<!-- 		<p:column width="120" headerText="Actions" id="ParametreAction" -->
+		<!-- 			style="text-align:center;"> -->
+		<!-- 			<p:commandButton id="Editer" icon="fa  fa-pencil" -->
+		<!-- 				action="#{parametreBean.editEnregistrement()}" -->
+		<!-- 				update=":mainForm:PGADD" oncomplete="PF('ParamAjout').show();" -->
+		<!-- 				title="Editer" process="@this"> -->
+		<!-- 				<f:setPropertyActionListener value="#{parametre}" -->
+		<!-- 					target="#{parametreBean.parametre}" /> -->
+		<!-- 			</p:commandButton> -->
+		<!-- 			<p:row rendered="#{parametre.Factif eq true}"> -->
+		<!-- 				<p:commandButton title="Désactiver Paramètre" -->
+		<!-- 					action="#{parametreBean.activerDesactiver()}" immediate="true" -->
+		<!-- 					icon="fa  fa-check" update=":mainForm:singleDT"> -->
+		<!-- 					<p:confirm header="Message de confirmation" icon="fa fa-check" /> -->
+		<!-- 					<f:setPropertyActionListener value="#{parametre}" -->
+		<!-- 						target="#{parametreBean.parametre}" /> -->
+		<!-- 				</p:commandButton> -->
+		<!-- 			</p:row> -->
+		<!-- 			<p:row rendered="#{parametre.Factif eq false}"> -->
+		<!-- 				<p:commandButton title="Activer Paramètre" -->
+		<!-- 					action="#{parametreBean.activerDesactiver()}" immediate="true" -->
+		<!-- 					icon="fa  fa-close" update=":mainForm:singleDT"> -->
+		<!-- 					<p:confirm header="Message de confirmation" icon="fa fa-check" /> -->
+		<!-- 					<f:setPropertyActionListener value="#{parametre}" -->
+		<!-- 						target="#{parametreBean.parametre}" /> -->
+		<!-- 				</p:commandButton> -->
+		<!-- 			</p:row> -->
+
+
+		<!-- 		</p:column> -->
+	</p:dataTable>
+	<p:dialog id="test" widgetVar="testW" dynamic="true" modal="true"
+		draggable="true" showEffect="fade" hideEffect="explode">
+		<f:facet name="header">  
+            Vous êtes sur le point de changer les paramètres d'envoi de SMS.
+         </f:facet>
+		<div class="Container100 Responsive100 ">
+			<p:commandButton value="Confirmer" styleClass="Fright"
+				action="#{smsParametreBean.changerParam()}"
+				onstart="PF('blockUIWidgetfiche').block()" immediate="true"
+				oncomplete="PF('blockUIWidgetfiche').unblock();PF('testW').hide();" />
+			<p:commandButton value="Annuler" styleClass="Fright"
+				action="#{smsParametreBean.init()}" process="@this"
+				onstart="PF('blockUIWidgetfiche').block()"
+				oncomplete="PF('blockUIWidgetfiche').unblock();PF('testW').hide();" />
+		</div>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+		<f:facet name="message">
+			<h:outputText
+				value="vous êtes sur le point de changer l'état du paramètre  ! &lt;br/&gt;  êtes vous sûr?"
+				escape="false" />
+		</f:facet>
+
+		<p:commandButton value="oui" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+		<p:commandButton value="non" type="button"
+			styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	</p:confirmDialog>
+
+
+</ui:composition>

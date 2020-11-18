@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+	<p:accordionPanel activeIndex="-1">
+
+		<p:tab title="Recherche avancée"
+			titleStyle="background-color: #0288d1">
+			<div class="Responsive100 Container50">
+				<p:fieldset legend="Filtrer par date">
+					<div class="Container100 White Responsive100">
+						<div class="Container50 White Responsive100">
+							<p:outputLabel value="Date début :"></p:outputLabel>
+						</div>
+						<div class="Container50 White Responsive100">
+							<p:calendar id="startDate"
+								value="#{clientsBean.objectSearchClient.startDate}"
+								styleClass="Container70" placeholder="Date début" />
+						</div>
+					</div>
+					<div class="Container100 White Responsive100">
+						<div class="Container50 White Responsive100">
+							<p:outputLabel value="Date Fin :"></p:outputLabel>
+						</div>
+						<div class="Container50 White Responsive100">
+							<p:calendar id="finishDate" styleClass=""
+								value="#{clientsBean.objectSearchClient.finishDate}"
+								placeholder="Date fin" />
+						</div>
+					</div>
+				</p:fieldset>
+			</div>
+			<div class="Responsive100 Container50">
+				<p:fieldset legend="Filtrer Par Flotte">
+					<div class="Container100 White Responsive100">
+						<div class="Container50 White Responsive100">
+							<p:outputLabel value="Entreprise :"></p:outputLabel>
+						</div>
+						<div class="Container50 White Responsive100">
+							<p:selectOneMenu id="flotteCombo"
+								value="#{clientsBean.objectSearchClient.flotte}"
+								converter="entityConverter" effect="fade" var="t" filter="true"
+								filterMatchMode="startsWith" styleClass="no-radius Container70">
+								<f:selectItem itemLabel="..." itemValue="" />
+								<f:selectItems value="#{clientsBean.listOfFlotte}" var="pc"
+									itemLabel="#{pc}" itemValue="#{pc}" />
+								<p:column>  
+					               							#{t} 					  
+					           						</p:column>
+							</p:selectOneMenu>
+						</div>
+					</div>
+				</p:fieldset>
+				<BR />
+				<div style="float: right;">
+					<p:commandButton value="Annuler" icon="fa fa-search Fs16 White"
+						action="#{clientsBean.init}" update=":mainForm:comptTB" />
+					<p:commandButton value="recherche" icon="fa fa-search Fs16 White"
+						action="#{clientsBean.rechercher}" update=":mainForm:comptTB" />
+				</div>
+			</div>
+		</p:tab>
+
+	</p:accordionPanel>
+
+</ui:composition>

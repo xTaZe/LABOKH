@@ -1,0 +1,130 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pr="http://primefaces.org/rio">
+
+   <h:panelGroup>
+			<p:fieldset legend="Mon Profile" style="font-size:11px;" id="fiche">
+
+				<h:panelGrid columns="4" width="100%">
+					<p:outputLabel value="Nom :" for="nom" styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:inputText id="nom" value="#{accueilFacade.connetedUser.nom}"
+							styleClass="no-radius" required="true"
+							requiredMessage="Ce champ est obligatoire : veuillez inscrire votre nom.">
+							<f:validateLength minimum="5" maximum="50" />
+						</p:inputText>
+						<p:message for="nom" />
+					</h:panelGrid>
+
+					<p:outputLabel value="Prenom : " for="prenom"
+						styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+
+						<p:inputText id="prenom"
+							value="#{accueilFacade.connetedUser.prenom}"
+							styleClass="no-radius" required="true"
+							requiredMessage="Ce champ est obligatoire : veuillez inscrire votre prenom .">
+							<f:validateLength minimum="5" maximum="50" />
+						</p:inputText>
+						<p:message for="prenom" />
+					</h:panelGrid>
+					<p:outputLabel value="Email :" styleClass="my-label-gs" for="email" />
+					<h:panelGrid columns="1">
+
+						<p:inputText value="#{accueilFacade.connetedUser.email}"
+							required="true"
+							requiredMessage="Ce champ est obligatoire : veuillez inscrire votre adresse courriel."
+							validatorMessage="Veuillez entrer une addresse électronique valide !"
+							size="40" id="email">
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+						</p:inputText>
+
+						<p:message for="email" />
+					</h:panelGrid>
+					<p:outputLabel value="Login : " for="login"
+						styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+
+						<p:inputText id="login"
+							value="#{accueilFacade.connetedUser.login}"
+							styleClass="no-radius" required="true"
+							requiredMessage="Ce champ est obligatoire : veuillez inscrire votre login.">
+							<f:validateLength minimum="5" maximum="50" />
+						</p:inputText>
+
+						<p:message for="login" />
+					</h:panelGrid>
+
+					<p:outputLabel value="téléphone : " for="telephone"
+						styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:inputText id="telephone"
+							value="#{accueilFacade.connetedUser.tel}" styleClass="no-radius"
+							required="true"
+							requiredMessage="Ce champ est obligatoire : veuillez inscrire votre numéro de téléphone .">
+							<f:validateLength minimum="5" maximum="50" />
+						</p:inputText>
+						<p:message for="telephone" />
+					</h:panelGrid>
+
+					<p:outputLabel value="Mot de passe actuel : " for="oldPassword"
+						styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:password id="oldPassword" value="#{accueilFacade.oldPassword}"
+							styleClass="no-radius" required="true"
+							requiredMessage="Ce champ est obligatoire : veuillez ajouter un password.">
+							<f:validateLength minimum="5" maximum="50" />
+						</p:password>
+						<p:message for="oldPassword" />
+					</h:panelGrid>
+
+					<p:outputLabel value="Nouveau mot de passe : " for="pwd1"
+						styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:password id="pwd1" value="#{accueilFacade.password}"
+							feedback="false" match="pwd2" label="Password 1"
+							styleClass="no-radius" required="true"
+							requiredMessage="Ce champ est obligatoire : veuillez ajouter un password.">
+							<f:validateLength minimum="5" maximum="50" />
+						</p:password>
+						<p:message for="pwd1" />
+					</h:panelGrid>
+
+					<p:outputLabel value="Vérification : " for="pwd2"
+						styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:password id="pwd2" value="#{accueilFacade.password2}"
+							feedback="false" label="Password 2" styleClass="no-radius"
+							required="true"
+							requiredMessage="Ce champ est obligatoire : veuillez resaisire le password.">
+							<f:validateLength minimum="5" maximum="50" />
+						</p:password>
+						<p:message for="pwd2" />
+					</h:panelGrid>
+
+
+				</h:panelGrid>
+
+				<p:separator />
+
+				<p:commandButton id="addLcde" value="Modifier"
+					action="#{accueilFacade.saveProfil()}" process=":mainForm:fiche"
+					update=":mainForm:fiche :mainForm:growl :profilForm:profil"
+					icon="ui-icon-plusthick" onstart="PF('blockUIWidgetfiche').block()"
+					oncomplete="PF('blockUIWidgetfiche').unblock()" />
+
+				<p:commandButton value="Retour" immediate="true"
+					icon="ui-icon-arrowreturnthick-1-s" update=":profilForm:profil"
+					action="/index.xhtml?faces-redirect=true" />
+
+
+			</p:fieldset>
+		</h:panelGroup>
+
+</ui:composition>

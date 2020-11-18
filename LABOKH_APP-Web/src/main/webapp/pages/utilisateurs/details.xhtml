@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+	<div>
+		<h:panelGroup>
+			<p:fieldset legend="Détails utilisateur" style="font-size:100%;"
+				id="fiel" styleClass="TextAlLeft">
+				<h:panelGroup>
+					<div class="Container100 White Responsive100">
+						<div class="Container100 White Responsive100">
+							<div class="Container100 White Responsive100">
+								<div class="Container20 White Responsive100">
+									<p:outputLabel value="Nom :" styleClass="my-label-gs" />
+								</div>
+								<p:outputLabel value="#{utilisateurBean.utilisateur.nom}" />
+							</div>
+							<div class="Container100 White Responsive100">
+								<div class="Container20 White Responsive100">
+
+									<p:outputLabel value="Prénom :" styleClass="my-label-gs" />
+								</div>
+								<p:outputLabel value="#{utilisateurBean.utilisateur.prenom}"></p:outputLabel>
+							</div>
+							<div class="Container100 White Responsive100">
+								<div class="Container20 White Responsive100">
+
+									<p:outputLabel value="Email :" styleClass="my-label-gs" />
+								</div>
+								<p:outputLabel value="#{utilisateurBean.utilisateur.email}"></p:outputLabel>
+							</div>
+							<div class="Container100 White Responsive100">
+								<div class="Container20 White Responsive100">
+
+									<p:outputLabel value="Nom d'utilisateur : "
+										styleClass="my-label-gs" />
+								</div>
+								<p:outputLabel value="#{utilisateurBean.utilisateur.login}"></p:outputLabel>
+							</div>
+							<div class="Container100 White Responsive100">
+								<div class="Container20 White Responsive100">
+
+									<p:outputLabel value="Téléphone : " styleClass=" my-label-gs" />
+								</div>
+								<p:outputLabel value="#{utilisateurBean.utilisateur.tel}"
+									styleClass="no-radius"></p:outputLabel>
+							</div>
+							<div class="Container100 White Responsive100">
+								<div class="Container20 White Responsive100">
+
+									<p:outputLabel value="Profil :" styleClass="my-label-gs" />
+								</div>
+								<p:outputLabel
+									value="#{utilisateurBean.utilisateur.profil.codProfil}"
+									styleClass="no-radius"></p:outputLabel>
+							</div>
+						</div>
+					</div>
+				</h:panelGroup>
+				<div class="EmptyBox30 Container100 Responsive100"></div>
+
+				<p:separator />
+				<p:commandButton value="Annuler" icon="ui-icon-arrowreturnthick-1-s"
+					onclick="PF('dlg2').hide();" />
+			</p:fieldset>
+		</h:panelGroup>
+
+	</div>
+
+</ui:composition>

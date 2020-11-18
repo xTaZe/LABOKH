@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+	<div>
+		<h:panelGroup>
+			<p:fieldset legend="Détail journal" style="font-size:11px;"
+				id="fiche">
+
+				<h:panelGrid columns="2" width="100%">
+					<p:outputLabel value="Nom  utilisateur :" styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:outputLabel value="#{journalBean.journal.utilisateur.nom}">
+
+						</p:outputLabel>
+					</h:panelGrid>
+					<p:outputLabel value="IP Server NAT :" styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:outputLabel value="#{journalBean.journal.ipprovenance}">
+
+						</p:outputLabel>
+					</h:panelGrid>
+					<p:outputLabel value="Adress Host :" styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:outputLabel value="#{journalBean.journal.zl1}">
+
+						</p:outputLabel>
+					</h:panelGrid>
+					<p:outputLabel value="Ip Hôte  :" styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:outputLabel value="#{journalBean.journal.zl2}">
+
+						</p:outputLabel>
+					</h:panelGrid>
+					<p:outputLabel value="Type action  :" styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:outputLabel value="#{journalBean.journal.actionDesc}">
+
+						</p:outputLabel>
+					</h:panelGrid>
+					<p:outputLabel value="Date connexion :" styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:outputLabel value="#{journalBean.journal.utilisateur.dateLastLogin}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+						</p:outputLabel>
+					</h:panelGrid>
+				</h:panelGrid>
+				<p:commandButton value="Annuler" icon="ui-icon-arrowreturnthick-1-s"
+					process="@this" onclick="PF('journaldetail').hide();" />
+			</p:fieldset>
+		</h:panelGroup>
+	</div>
+
+</ui:composition>

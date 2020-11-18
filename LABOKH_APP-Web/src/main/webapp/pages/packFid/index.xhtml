@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<div class="Container70 Responsive100">
+			<div class="Container100">
+				<div class="ContainerIndent">
+					<div class="Card ShadowEffect HeiAutoOnMobile">
+						<h:panelGroup id="middleBox">
+						<ui:include src="list.xhtml"></ui:include>
+						<ui:include src="form.xhtml"></ui:include>
+				</h:panelGroup>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<script type="text/javascript">
+			function handleLoginRequest(xhr, status, args) {
+				if (args.validationFailed) {
+					PF('PCAjout').jq.effect("shake", {
+						times : 5
+					}, 100);
+				} else {
+					PF('PCAjout').hide();
+				}
+			}
+		</script>
+
+	</ui:define>
+
+</ui:composition>

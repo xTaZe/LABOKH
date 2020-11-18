@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+
+
+	<component>
+		<component-type>org.primefaces.component.RioMenu</component-type>
+		<component-class>org.primefaces.rio.component.menu.RioMenu</component-class>
+	</component>
+
+	<render-kit>
+		<renderer>
+			<component-family>org.primefaces.component</component-family>
+			<renderer-type>org.primefaces.component.RioMenuRenderer</renderer-type>
+			<renderer-class>org.primefaces.rio.component.menu.RioMenuRenderer</renderer-class>
+		</renderer>
+	</render-kit>
+	<converter>
+		<converter-id>selectConverter</converter-id>
+		<converter-class>com.fr.adaming.jsfapp.util.ComboBoxItemConverter</converter-class>
+	</converter>
+	<converter>
+		<converter-id>entityConverter</converter-id>
+		<converter-class>com.fr.adaming.jsfapp.converter.EntityConverter</converter-class>
+	</converter>
+
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>toAccueil</from-outcome>
+			<to-view-id>/pages/accueil.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Module utilisateur -->
+		<navigation-case>
+			<from-outcome>toIndexUtilisateur</from-outcome>
+			<to-view-id>/pages/utilisateurs/index.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>toManageEtudiant</from-outcome>
+			<to-view-id>/pages/admin/etudiant/index.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>toManageSeance</from-outcome>
+			<to-view-id>/pages/admin/seance/index.jsf</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>toMyProfil</from-outcome>
+			<to-view-id>/pages/profil/index.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>toManageCoef</from-outcome>
+			<to-view-id>/pages/parametreCoef/index.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>toMarqueIndex</from-outcome>
+			<to-view-id>/pages/marque/index.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>toCompteFideliteIndex</from-outcome>
+			<to-view-id>/pages/compteFidelite/index.jsf</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>toSmsIndex</from-outcome>
+			<to-view-id>/pages/sms/index.jsf</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>toJournalIndex</from-outcome>
+			<to-view-id>/pages/journal/index.jsf</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>toUtilisateurIndex</from-outcome>
+			<to-view-id>/pages/utilisateurs/index.jsf</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>toProfilsIndex</from-outcome>
+			<to-view-id>/pages/profils/index.jsf</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>toListOfFactures</from-outcome>
+			<to-view-id>/pages/facture/index.jsf</to-view-id>
+			<redirect />
+		</navigation-case>
+
+	</navigation-rule>
+
+	<validator>
+		<description>emailValidator</description>
+		<display-name>emailValidator</display-name>
+		<validator-id>emailValidator</validator-id>
+		<validator-class>com.fr.adaming.jsfapp.validator.EmailValidator</validator-class>
+	</validator>
+	<application>
+		<locale-config>
+			<default-locale>fr</default-locale>
+			<supported-locale>fr</supported-locale>
+		</locale-config>
+		<!-- c'est pour laisse la main a Spring pour gérer le control -->
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+		<resource-bundle>
+			<base-name>ResourceBundle</base-name>
+			<var>mgo</var>
+		</resource-bundle>
+
+		<action-listener>org.primefaces.application.DialogActionListener</action-listener>
+		<navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
+		<view-handler>org.primefaces.application.DialogViewHandler</view-handler>
+	</application>
+
+</faces-config>

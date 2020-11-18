@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+	<div>
+		<div>
+			<p:fieldset legend="Liste des SMS " style="font-size:11px;"
+				id="fiche">
+				<h:panelGrid columns="1">
+					<h:panelGrid columns="6" style="float: right;">
+						<h:panelGrid columns="2" style="margin-bottom:10px"
+							cellpadding="5">
+							<h:outputText value="SMS envoyé " />
+							<p:selectBooleanCheckbox id="Esms" value="#{smsBean.smsEN}"
+								disabled="#{smsBean.smsAll}">
+								<p:ajax update="tb Asms Nsms" listener="#{smsBean.smsactif()}" />
+							</p:selectBooleanCheckbox>
+						</h:panelGrid>
+						<h:panelGrid columns="2" style="margin-bottom:10px"
+							cellpadding="5">
+							<h:outputText value="SMS non envoyé " />
+							<p:selectBooleanCheckbox id="Nsms" value="#{smsBean.smsNEN}"
+								disabled="#{smsBean.smsAll}">
+								<p:ajax update="tb Esms Asms" listener="#{smsBean.smsInactif()}" />
+							</p:selectBooleanCheckbox>
+						</h:panelGrid>
+						<h:panelGrid columns="2" style="margin-bottom:10px"
+							cellpadding="5">
+							<h:outputText value="Tous les SMS " />
+							<p:selectBooleanCheckbox id="Asms" value="#{smsBean.smsAll}">
+								<p:ajax update="tb Esms Nsms" listener="#{smsBean.smsall()}" />
+							</p:selectBooleanCheckbox>
+						</h:panelGrid>
+					</h:panelGrid>
+					<p:dataTable value="#{smsBean.listsms}" var="u" rows="10"
+						paginator="true" paginatorPosition="bottom"
+						emptyMessage="Aucun enregistrement trouvé. " widgetVar="table"
+						id="tb" reflow="true"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15,20">
+
+						<div style="clear: both" />
+
+
+						<p:column headerText="Nom et prénom" width="100">
+							<h:outputText
+								value="#{u.compteFidelite.nom} #{u.compteFidelite.prenom}">
+
+							</h:outputText>
+						</p:column>
+						<p:column headerText="N° compte" width="100">
+							<h:outputText value="#{u.compteFidelite.NCompt}">
+
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Date envoie" width="100">
+							<h:outputText value="#{u.dateEnvoi}">
+
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Contenu SMS   " width="100">
+							<h:outputText value="#{u.message}">
+
+							</h:outputText>
+						</p:column>
+
+
+
+						<!-- 						<p:commandButton icon="fa fa-search" -->
+						<!-- 							action="#{journalBean.detailsEnregistrement()}" -->
+						<!-- 							onclick="PF('journaldetail').show();" title="Détail" -->
+						<!-- 							immediate="true" update=":mainForm:f2:fiche" process="@this"> -->
+						<!-- 							<f:setPropertyActionListener value="#{u}" -->
+						<!-- 								target="#{journalBean.journal}" /> -->
+						<!-- 						</p:commandButton> -->
+
+						<!-- 					</p:column> -->
+						<!-- 				</p:dataTable> -->
+					</p:dataTable>
+				</h:panelGrid>
+			</p:fieldset>
+
+
+		</div>
+	</div>
+
+</ui:composition>

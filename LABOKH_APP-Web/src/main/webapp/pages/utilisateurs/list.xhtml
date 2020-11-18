@@ -1,0 +1,106 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+	<div>
+		
+			<p:dataTable value="#{utilisateurBean.utilisateurs}" var="u" rows="5"
+				paginator="true" paginatorPosition="bottom"
+				emptyMessage="Aucun enregistrement trouvé. " widgetVar="table"
+				id="tb" reflow="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15,20">
+				<f:facet name="header">
+				GESTION DES UTILISATEURS
+					<p:commandButton icon="fa fa-plus Fs16 White"
+						styleClass="BlueTextButton RaisedButton" style="float:right"
+						immediate="true"
+						action="#{utilisateurBean.nouveauEnregistrement()}"
+						oncomplete="PF('dlg3').show()" process="@this" update=":mainForm" />
+					<div style="clear: both" />
+				</f:facet>
+				<p:column headerText="Date dernière connexion " sortBy="#{u.dateLastLogin}"
+					width="100">
+					<h:outputText value="#{u.dateLastLogin}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Nom Prénom" filterBy="#{u.nom}  #{u.prenom}"
+					filterMatchMode="contains">
+					<h:outputText value="#{u.nom}    #{u.prenom}" />
+				</p:column>
+				<p:column headerText="CIN" filterBy="#{u.cin}"
+					filterMatchMode="contains">
+					<h:outputText value="#{u.cin}" />
+				</p:column>
+				<p:column headerText="Nom d'utilisateur" filterBy="#{u.login}"
+					filterMatchMode="contains">
+					<h:outputText value="#{u.login}" />
+				</p:column>
+
+				<p:column headerText="Profil">
+					<h:outputText value="#{u.profil.desProfil}" />
+				</p:column>
+
+
+				<p:column headerText="Téléphone" styleClass="not-show-at-start">
+					<h:outputText value="#{u.tel}" />
+				</p:column>
+
+				<p:column width="150" headerText="Actions"
+					style="text-align:center;">
+
+					<p:row rendered="#{u.FActif eq true}">
+						<p:commandButton title="Désactiver"
+							action="#{utilisateurBean.activerDesactiver()}" immediate="true"
+							icon="fa  fa-check" update="tb">
+							<p:confirm header="Message de confirmation" icon="fa fa-check" />
+							<f:setPropertyActionListener value="#{u}"
+								target="#{utilisateurBean.utilisateur}" />
+						</p:commandButton>
+					</p:row>
+					<p:row rendered="#{u.FActif eq false}">
+						<p:commandButton title="Activer"
+							action="#{utilisateurBean.activerDesactiver()}" immediate="true"
+							icon="fa  fa-close" update="tb">
+							<p:confirm header="Message de confirmation" icon="fa fa-check" />
+							<f:setPropertyActionListener value="#{u}"
+								target="#{utilisateurBean.utilisateur}" />
+						</p:commandButton>
+					</p:row>
+					<p:commandButton icon="fa  fa-pencil"
+						action="#{utilisateurBean.editEnregistrement()}"
+						onclick="PF('dlg3').show();" title="Editer" immediate="true"
+						update=":mainForm:middleBox:field" process="@this">
+						<f:setPropertyActionListener value="#{u}"
+							target="#{utilisateurBean.utilisateur}" />
+					</p:commandButton>
+					<p:commandButton icon="fa fa-search"
+						action="#{utilisateurBean.detailsEnregistrement()}"
+						onclick="PF('dlg2').show();" title="détails" immediate="true"
+						update=":mainForm:f2:fiel" process="@this">
+						<f:setPropertyActionListener value="#{u}"
+							target="#{utilisateurBean.utilisateur}" />
+					</p:commandButton>
+
+				</p:column>
+			</p:dataTable>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+				<f:facet name="message">
+					<h:outputText
+						value="vous êtes sur le point de changer l'état d'utilisateur  ! &lt;br/&gt;  êtes vous sûr?"
+						escape="false" />
+				</f:facet>
+
+				<p:commandButton value="oui" type="button"
+					styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+				<p:commandButton value="non" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
+
+	</div>
+
+</ui:composition>

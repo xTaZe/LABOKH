@@ -1,0 +1,172 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="Container30 Responsive100">
+		<div class="Container100 Responsive50">
+			<div class="ContainerIndent">
+				<div class="Card ShadowEffect HeiAutoOnMobile OvHidden">
+					<div class="Container100"
+						style="margin: 0px 10px 10px -10px; padding: 0px 10px;">
+
+						<p></p>
+						<span class="Gray FontRobotoLight Fs20">Veuillez saisir le
+							N° carte FID</span><br />
+
+					</div>
+					<div class="CardFooter">
+						<p:inputText value="#{carteFidHome.numCarte}" id="textSearch"
+							placeholder="Veillez Passer la douchette ..."
+							styleClass="Container90" />
+						<p:commandButton action="#{carteFidHome.recherche()}"
+							id="hiddenSearch" style="display: none"
+							update=":bRightForm :mainForm:middleBox :mainForm:growl"></p:commandButton>
+					</div>
+				</div>
+			</div>
+		</div>
+		<h:panelGroup id="CarteFidRight">
+			<div class="Container100 Responsive50">
+				<div class="ContainerIndent">
+					<div class="Card ShadowEffect HeiAutoOnMobile OvHidden">
+						<div class="Container100"
+							style="margin: 0px 10px 10px -10px; padding: 0px 10px;">
+
+
+							<h:panelGroup rendered="#{empty carteFidHome.compteFidelite }">
+								<span class="Gray FontRobotoLight Fs20"> Veuillez insérer
+									un numéro de carte fidélité valide. </span>
+								<br />
+								<span class="Gray FontRobotoLight Fs20"> Merci </span>
+
+							</h:panelGroup>
+							<h:panelGroup rendered="#{!empty carteFidHome.compteFidelite }">
+								<h:panelGroup
+									rendered="#{mouvementUserBean.compteFidelite.FActif}">
+									<div class="SoftGreenBack DispInlBlock Fright"
+										style="margin: -10px 10px -10px -10px; padding: 5px 10px;">
+										<i class="icon-check51 Green Fs40"></i>
+									</div>
+								</h:panelGroup>
+								<h:panelGroup
+									rendered="#{!mouvementUserBean.compteFidelite.FActif}">
+									<div class="SoftRedBack DispInlBlock Fright"
+										style="margin: -10px 10px -10px -10px; padding: 5px 10px;">
+										<i class="icon-close Red Fs40"></i>
+									</div>
+								</h:panelGroup>
+								<span class="Red Fs18 FontRobotoBold"><p:outputLabel
+										value="N° Carte :  " />#{carteFidHome.compteFidelite.NCompt}
+								</span>
+								<br />
+								<span class="Green Fs30 FontRobotoBold"><p:outputLabel
+										value="Nombre de points :  " />#{carteFidHome.compteFidelite.nbPoints}
+								</span>
+								<br />
+								<span class="Gray FontRobotoLight Fs16"><p:outputLabel
+										value="Propriétaire :  " />#{carteFidHome.compteFidelite.nom}
+									#{carteFidHome.compteFidelite.prenom} </span>
+								<br />
+
+								<span class="Gray FontRobotoLight Fs16"><p:outputLabel
+										value="Marque : " />#{carteFidHome.compteFidelite.marque.libelle}
+								</span>
+								<br />
+								<span class="Gray FontRobotoLight Fs16"><p:outputLabel
+										value="Entreprise 1 : " />
+									#{carteFidHome.compteFidelite.entreprise1} </span>
+								<br />
+								<span class="Gray FontRobotoLight Fs16"><p:outputLabel
+										value="Marque voiture : " />#{carteFidHome.compteFidelite.marque_1}
+								</span>
+								<br />
+								<span class="Gray FontRobotoLight Fs16"><p:outputLabel
+										value="Téléphone (P) : " />#{carteFidHome.compteFidelite.portable}
+								</span>
+								<br />
+								<span class="Gray FontRobotoLight Fs16"><p:outputLabel
+										value="Fonction : " />#{carteFidHome.compteFidelite.fonction}
+								</span>
+							</h:panelGroup>
+						</div>
+						<div class="CardFooter">
+							<h:panelGroup rendered="#{!empty carteFidHome.compteFidelite }">
+								<!-- 								<span class="Red Fleft Fs18">- % 35</span> -->
+								<h:panelGroup rendered="#{view.viewId != '/pages/index.xhtml'}">
+									<p:commandLink
+										actionListener="#{mouvementUserBean.ajoutFacture}"
+										title="Ajout Facture"
+										styleClass="CardFooterBtn Gray BorderLeft Fright ripplelink"
+										oncomplete="PF('dlgFact').show();" immediate="true"
+										update=":fact">
+										<i class="icon-add182"></i>
+
+									</p:commandLink>
+									<p:commandLink
+										actionListener="#{mouvementUserBean.consomPoints}"
+										title="Conversion des points"
+										styleClass="CardFooterBtn Gray BorderLeft Fright ripplelink"
+										oncomplete="PF('dlgCnv').show();" immediate="true"
+										update=":mvn">
+										<i class="icon-receipt9"></i>
+
+									</p:commandLink>
+									<p:commandLink actionListener="#{mouvementUserBean.init}"
+										title="Historique des mouvements"
+										styleClass="CardFooterBtn Gray BorderLeft Fright ripplelink"
+										oncomplete="PF('dlgTbMvn').show();" rendered="${true}"
+										immediate="true" update=":bRightFormPOP">
+										<i class="icon-switch29"></i>
+									</p:commandLink>
+
+								</h:panelGroup>
+
+								<h:panelGroup rendered="#{view.viewId == '/pages/index.xhtml'}">
+									<p:commandLink
+										actionListener="#{mouvementUserBean.ajoutFacture}"
+										title="Ajout Facture"
+										styleClass="CardFooterBtn Gray BorderLeft Fright ripplelink"
+										update=":mainForm:middleBox :mainForm:car"
+										oncomplete="window.location.reload()">
+										<i class="icon-add182"></i>
+
+									</p:commandLink>
+									<p:commandLink
+										actionListener="#{mouvementUserBean.consomPoints}"
+										title="Conversion des points"
+										styleClass="CardFooterBtn Gray BorderLeft Fright ripplelink"
+										update=":mainForm:middleBox" immediate="true">
+										<i class="icon-receipt9"></i>
+
+									</p:commandLink>
+									<p:commandLink actionListener="#{mouvementUserBean.init}"
+										title="Historique des mouvements"
+										styleClass="CardFooterBtn Gray BorderLeft Fright ripplelink"
+										update=":mainForm:middleBox" immediate="true">
+										<i class="icon-switch29"></i>
+
+									</p:commandLink>
+
+								</h:panelGroup>
+							</h:panelGroup>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</h:panelGroup>
+
+	</div>
+	<!-- 	<h:panelGroup rendered="#{view.viewId != '/pages/index.xhtml'}"> -->
+	<!-- 		<ui:include src="/pages/include/formMvnFacture.xhtml"></ui:include> -->
+	<!-- 	</h:panelGroup> -->
+	<!-- 	<h:panelGroup rendered="#{view.viewId != '/pages/index.xhtml'}"> -->
+	<!-- 		<ui:include src="/pages/include/formCnvPts.xhtml"></ui:include> -->
+	<!-- 	</h:panelGroup> -->
+	<!-- 	<h:panelGroup rendered="#{view.viewId != '/pages/index.xhtml'}"> -->
+	<!-- 		<ui:include src="/pages/include/listMvnCarte.xhtml"></ui:include> -->
+	<!-- 	</h:panelGroup> -->
+
+</ui:composition>

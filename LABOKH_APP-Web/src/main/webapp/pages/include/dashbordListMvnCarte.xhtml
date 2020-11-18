@@ -1,0 +1,108 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+
+	<p:dataTable id="dashtbMvn" reflow="true"
+		value="#{mouvementUserBean.mouvementFids}" var="v" paginator="true"
+		paginatorPosition="bottom"
+		emptyMessage="No records found with given criteria" rows="10"
+		selectionMode="single" selection="#{mouvementUserBean.mouvement}"
+		rowKey="#{v.idMouvement}">
+		<p:ajax event="rowSelect" update=":mainForm:factureDetail"
+			oncomplete="PF('movFacture').show('#{component.clientId}')" />
+
+		<p:column headerText="Date">
+			<h:outputText value="#{v.date}">
+				<f:convertDateTime pattern="dd/MM/yyyy à HH:mm" />
+			</h:outputText>
+		</p:column>
+		<p:column headerText="Validé par">
+			<h:outputText value="#{v.utilisateur.nom} #{v.utilisateur.prenom}" />
+		</p:column>
+		<p:column headerText="Mouvement">
+			<h:panelGroup rendered="#{v.statut}">
+				<h:panelGroup rendered="#{v.typeMvt == 'Facture'}">
+
+					<i class="fa icon-download164 Fs20 Green "> <h:outputText
+							value="   + #{v.montant}" />
+					</i>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{v.typeMvt != 'Facture'}">
+					<i class="fa icon-upload119 Fs20 Red "> <h:outputText
+							value="   - #{v.montant}" />
+					</i>
+				</h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{!v.statut}">
+				<h:panelGroup rendered="#{!empty v.CVC}">
+					<i class="fa fa-spinner Fs20 Orange "> <h:outputText
+							value="   #{v.CVC}" />
+					</i>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{!empty v.numOR}">
+					<i class="fa fa-spinner Fs20 Orange "> <h:outputText
+							value="   #{v.numOR}" />
+					</i>
+				</h:panelGroup>
+			</h:panelGroup>
+		</p:column>
+
+
+	</p:dataTable>
+
+	<!-- 	<p:overlayPanel widgetVar="movFacture" showEffect="fade" dynamic="true" -->
+	<!-- 		hideEffect="fade" dismissable="false" showCloseIcon="true" -->
+	<!-- 		for="dashtbMvn" my="top right" at="top right"> -->
+
+	<p:overlayPanel widgetVar="movFacture" showEffect="fade" dynamic="true"
+		hideEffect="fade" dismissable="true" showCloseIcon="true"
+		my="top right" at="top right">
+		<p:outputPanel id="factureDetail" style="text-align:center;">
+			<h:panelGroup rendered="#{mouvementUserBean.mouvement.statut}">
+				<p:panelGrid id="detailFacture" columns="2"
+					rendered="#{mouvementUserBean.mouvement.typeMvt == 'Facture'}">
+
+					<h:outputText value="Numéro Facture" />
+					<h:outputText
+						value="#{mouvementUserBean.mouvement.facture.numFacture}" />
+
+					<h:outputText value="Date de Facture" />
+					<h:outputText
+						value="#{mouvementUserBean.mouvement.facture.dateFacture}">
+					</h:outputText>
+
+					<h:outputText value="Total" />
+					<h:outputText
+						value="#{mouvementUserBean.mouvement.facture.totalPrix}" />
+				</p:panelGrid>
+				<p:panelGrid id="detailPack" columns="2"
+					rendered="#{mouvementUserBean.mouvement.typeMvt == 'Conversion'}">
+
+					<h:outputText value="Type Pack Cadeau" />
+					<h:outputText
+						value="#{mouvementUserBean.mouvement.packCadeaux.packCompt.typePack}" />
+					<h:outputText value="Valeur" />
+					<h:outputText
+						value="#{mouvementUserBean.mouvement.packCadeaux.valeur}" />
+
+				</p:panelGrid>
+
+			</h:panelGroup>
+			<h:panelGroup rendered="#{!mouvementUserBean.mouvement.statut}">
+				<h:panelGroup rendered="#{!empty mouvementUserBean.mouvement.CVC}">
+					<h:outputText
+						value="LA COMMANDE :  #{mouvementUserBean.mouvement.CVC} est encore EN ATTENTE DE FACTURATION." />
+				</h:panelGroup>
+				<h:panelGroup rendered="#{!empty mouvementUserBean.mouvement.numOR}">
+					<h:outputText
+						value="L'ORDRE DE REPARATION :  #{mouvementUserBean.mouvement.numOR} est encore EN ATTENTE DE FACTURATION" />
+				</h:panelGroup>
+			</h:panelGroup>
+		</p:outputPanel>
+	</p:overlayPanel>
+
+
+</ui:composition>

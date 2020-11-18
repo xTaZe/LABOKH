@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+	<div>
+
+
+		<p:dataTable value="#{profilBean.profils}" var="p" rows="5"
+			paginator="true" paginatorPosition="bottom"
+			emptyMessage="Aucun enregistrement trouvé. " widgetVar="table"
+			id="tb"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10">
+			<f:facet name="header">
+			LISTE DES PROFILS
+
+					<p:commandButton icon="fa fa-plus Fs16 White"
+					styleClass="BlueTextButton RaisedButton" style="float:right"
+					action="#{profilBean.nouveauEnregistrement()}"
+					oncomplete="PF('aj').show()" process="@this"
+					update=":mainForm:fr:fiche" />
+				<div style="clear: both" />
+			</f:facet>
+			<p:column headerText="libellé">
+				<h:outputText value="#{p.codProfil}" />
+			</p:column>
+
+			<p:column headerText="Description ">
+				<h:outputText value="#{p.desProfil}" />
+			</p:column>
+			<p:column width="150" headerText="Actions" style="text-align:center;">
+
+				<p:row rendered="#{p.flagActif eq true}">
+					<p:commandButton title="Désactiver"
+						action="#{profilBean.activerDesactiver()}" immediate="true"
+						icon="fa  fa-check" update="tb">
+						<p:confirm header="Message de confirmation" icon="fa fa-check" />
+						<f:setPropertyActionListener value="#{p}"
+							target="#{profilBean.profil}" />
+					</p:commandButton>
+				</p:row>
+				<p:row rendered="#{p.flagActif eq false}">
+					<p:commandButton title="Activer"
+						action="#{profilBean.activerDesactiver()}" immediate="true"
+						icon="fa  fa-close" update="tb">
+						<p:confirm header="Message de confirmation" icon="fa fa-check" />
+						<f:setPropertyActionListener value="#{p}"
+							target="#{profilBean.profil}" />
+					</p:commandButton>
+				</p:row>
+				<p:commandButton icon="fa  fa-pencil"
+					action="#{profilBean.editEnregistrement()}" immediate="true"
+					update=":mainForm:fr:fiche" process="@this"
+					onclick="PF('aj').show();" title="Editer">
+					<f:setPropertyActionListener value="#{p}"
+						target="#{profilBean.profil}" />
+				</p:commandButton>
+				<p:commandButton icon="fa fa-search"
+					action="#{profilBean.detailsEnregistrement()}" immediate="true"
+					update=":mainForm:f2:fic" process="@this"
+					onclick="PF('dt').show();" title="détails">
+					<f:setPropertyActionListener value="#{p}"
+						target="#{profilBean.profil}" />
+				</p:commandButton>
+
+			</p:column>
+		</p:dataTable>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+			<f:facet name="message">
+				<h:outputText
+					value="vous êtes sur le point de changer l'état profil  ! &lt;br/&gt;  êtes vous sûr?"
+					escape="false" />
+			</f:facet>
+
+			<p:commandButton value="oui" type="button"
+				styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+			<p:commandButton value="non" type="button"
+				styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		</p:confirmDialog>
+
+
+	</div>
+
+</ui:composition>

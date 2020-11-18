@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+
+	<p:fieldset legend="Description mouvement" collapsed="true"
+		toggleable="true">
+		<div class="Container100  Responsive100">
+			<div class="Container50  Responsive100">
+				<div class="Container50  Responsive100">
+					<p:outputLabel value="date : "
+						styleClass="Gray FontRobotoLight Fs16 " />
+				</div>
+				<div class="Container50  Responsive100">
+					<p:outputLabel value="#{mouvementUserBean.mouvementFid.date}"
+						styleClass="Gray FontRobotoLight Fs16 ">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:outputLabel>
+				</div>
+			</div>
+			<div class="Container50 Responsive100 ">
+				<p:outputLabel
+					value=" #{mouvementUserBean.mouvementFid.compteFidelite.NCompt}"
+					styleClass="Red FontRobotoBold Fs16 Fright" />
+				<p:outputLabel value="N° carte fidélité : "
+					styleClass="Gray FontRobotoLight Fs16 Fright" />
+
+			</div>
+			<div class="EmptyBox10 Container100 Responsive100"></div>
+			<div class="Container50 Responsive100 ">
+				<div class="Container50  Responsive100">
+					<p:outputLabel value="Entreprise 1 : "
+						styleClass=" FontRobotoLight Fs16 " />
+				</div>
+				<div class="Container50  Responsive100">
+					<p:outputLabel
+						value="#{mouvementUserBean.mouvementFid.compteFidelite.entreprise1}"
+						styleClass="Gray FontRobotoLight Fs16 " />
+				</div>
+
+			</div>
+			<div class="Container50 Responsive100 ">
+				<div class="Container50  Responsive100">
+					<p:outputLabel value="Entreprise 2 : "
+						styleClass="FontRobotoLight Fs16 " />
+				</div>
+				<div class="Container50  Responsive100">
+					<p:outputLabel
+						value=" #{mouvementUserBean.mouvementFid.compteFidelite.entreprise2}"
+						styleClass="Gray FontRobotoLight Fs16 " />
+				</div>
+			</div>
+			<div class="Container50 Responsive100 ">
+				<div class="Container50  Responsive100">
+					<p:outputLabel value="Email :" styleClass=" FontRobotoLight Fs16 " />
+				</div>
+				<div class="Container50  Responsive100">
+					<p:outputLabel
+						value=" #{mouvementUserBean.mouvementFid.compteFidelite.email}"
+						styleClass="Gray FontRobotoLight Fs16 " />
+				</div>
+			</div>
+
+			<div class="Container50 Responsive100 ">
+				<div class="Container50  Responsive100">
+					<p:outputLabel value="PMC :" styleClass=" FontRobotoLight Fs16 " />
+				</div>
+				<div class="Container50  Responsive100">
+					<p:outputLabel
+						value="#{mouvementUserBean.mouvementFid.compteFidelite.datePmc}"
+						styleClass="Gray FontRobotoLight Fs16 ">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:outputLabel>
+				</div>
+			</div>
+
+		</div>
+	</p:fieldset>
+
+</ui:composition>

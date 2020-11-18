@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<div class="Container100 Responsive100">
+			<div class="Container100">
+				<div class="ContainerIndent">
+					<div class="Card ShadowEffect HeiAutoOnMobile">
+						<h:panelGroup id="middleBox">
+
+							<ui:include src="list.xhtml"></ui:include>
+
+						</h:panelGroup>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+		<!-- 		<div class="Container100"> -->
+		<!-- 			<div class="ContainerIndent"> -->
+		<!-- 				<div class="Card ShadowEffect TexAlCenter"> -->
+		<!-- 					<h:form id="fr"> -->
+		<!-- 						<ui:include src="list.xhtml"></ui:include> -->
+
+
+		<!-- 					</h:form> -->
+
+		<!-- 				</div> -->
+		<!-- 			</div> -->
+		<!-- 		</div> -->
+
+		<h:form id="f2">
+			<p:dialog header="Détails journal" widgetVar="journaldetail"
+				modal="true" width="60%" resizable="false">
+				<ui:include src="details.xhtml"></ui:include>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="blockRight">
+
+	</ui:define>
+
+</ui:composition>

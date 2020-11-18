@@ -1,0 +1,128 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<p:dialog header="Détails Paramètre" widgetVar="ParamAjout"
+		modal="true" responsive="true" width="60%">
+		<form>
+			<h:panelGroup id="PGADD2">
+
+				<div id="wrapper">
+					<div id="wrapperIndent">
+						<div class="Responsive100 Container100">
+							<h:panelGroup id="PGADD">
+
+								<div class="Container50 White Responsive100">
+									<div class="Container50 White Responsive50">
+										<p:outputLabel for="ednom" value="Nom Société:" />
+									</div>
+									<div class="Container50 White Responsive50">
+										<p:inputText id="ednom"
+											value="#{parametreBean.parametre.nomSociete}"
+											placeholder="Nom Société..." required="true"
+											requiredMessage="Veuillez saisir le nom de la société">
+											<f:validateLength minimum="5" maximum="50" />
+										</p:inputText>
+									</div>
+								</div>
+								<div class="Container50 White Responsive100">
+									<div class="Container50 White Responsive50">
+										<p:outputLabel for="adresse" value="Adresse :  " />
+									</div>
+									<div class="Container50 White Responsive50">
+										<p:inputText id="adresse"
+											value="#{parametreBean.parametre.adresse}"
+											placeholder="Adresse..." required="true"
+											requiredMessage="Veuillez saisir le nom de la société" />
+									</div>
+								</div>
+								<div class="EmptyBox5 Container100 White Responsive100"></div>
+								<div class="Container50 White Responsive100">
+									<div class="Container50 White Responsive50">
+										<p:outputLabel for="tel" value="Téléphone: " />
+									</div>
+									<div class="Container50 White Responsive50">
+										<p:inputText id="tel" value="#{parametreBean.parametre.tel}"
+											placeholder="Téléphone..." required="true"
+											requiredMessage="Veuillez saisir le numéro de téléphone"
+											validatorMessage="Veuillez saisir un numéro de téléphone valide.">
+											<f:validateRegex
+												pattern="((\+|00)216)?([2579][0-9]{7}|(3[012]|4[01]|8[0128])[0-9]{6}|42[16][0-9]{5})" />
+										</p:inputText>
+									</div>
+								</div>
+
+								<div class="Container50 White Responsive100">
+									<div class="Container50 White Responsive50">
+										<p:outputLabel for="fax" value="Fax :  " />
+									</div>
+									<div class="Container50 White Responsive50">
+										<p:inputText id="fax" value="#{parametreBean.parametre.fax}"
+											placeholder="Fax..." required="true"
+											validatorMessage="Veuillez saisir un fax valide."
+											requiredMessage="Veuillez saisir le fax">
+											<f:validateRegex
+												pattern="((\+|00)216)?([2579][0-9]{7}|(3[012]|4[01]|8[0128])[0-9]{6}|42[16][0-9]{5})" />
+										</p:inputText>
+									</div>
+
+								</div>
+								<div class="EmptyBox5 Container100 White Responsive100"></div>
+								<div class="Container50 White Responsive100">
+									<div class="Container50 White Responsive50">
+										<p:outputLabel for="email" value="E-Mail :  " />
+									</div>
+									<div class="Container50 White Responsive50">
+										<p:inputText id="email"
+											value="#{parametreBean.parametre.email}"
+											placeholder="Adresse mail ..."
+											requiredMessage="Veuillez saisir une adresse mail"
+											validatorMessage="Veuillez saisir une adresse mail valide."
+											required="true">
+											<f:validateRegex
+												pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+										</p:inputText>
+									</div>
+								</div>
+								<div class="EmptyBox5 Container100 White Responsive100"></div>
+							</h:panelGroup>
+						</div>
+
+						<p:separator />
+						<div class="Container100 White Responsive100">
+							<p:commandButton id="addLcde" value="Enregistrer"
+								action="#{parametreBean.saveEnregistrement()}"
+								update=":mainForm:PGADD :mainForm:growl mainForm:singleDT"
+								icon="ui-icon-plusthick"
+								onstart="PF('blockUIWidgetfiche').block()"
+								oncomplete="PF('blockUIWidgetfiche').unblock();handleLoginRequest(xhr, status, args);" />
+
+							<p:commandButton value="Annuler" process="@this"
+								icon="ui-icon-arrowreturnthick-1-s"
+								action="#{parametreBean.nouveauEnregistrement()}"
+								update=":mainForm:PGADD2 :mainForm:PGADD"
+								oncomplete="PF('ParamAjout').hide();" />
+							<p:messages></p:messages>
+							<pe:blockUI target=":mainForm:PGADD"
+								widgetVar="blockUIWidgetfiche">
+								<h:panelGrid columns="2">
+									<h:graphicImage library="imggif" name="ajax-loader.gif"
+										value="ajax-loader1.gif"
+										style="margin-right: 12px; vertical-align: middle;" />
+									<h:outputText value="chargement en en cours..."
+										style="white-space: nowrap;" />
+								</h:panelGrid>
+							</pe:blockUI>
+
+						</div>
+
+					</div>
+				</div>
+			</h:panelGroup>
+		</form>
+	</p:dialog>
+</ui:composition>
+

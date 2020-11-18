@@ -1,0 +1,182 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<div class="Container70 Responsive100">
+			<div class="Container100">
+				<div class="ContainerIndent">
+					<div class="Card ShadowEffect HeiAutoOnMobile">
+						<h:panelGroup id="middleBox">
+							<p:fieldset legend="Informations personnelles"
+								styleClass="Container40 Responsive100">
+								<div class="Container100 Responsive100">
+
+									<div class="Container50 White Responsive50">
+										<p:outputLabel value="Nom :" for="nomLabel" />
+									</div>
+									<div class="Container50 White Responsive50">
+										<p:outputLabel id="nomLabel"
+											value="#{accueilFacade.connetedUser.nom}" />
+									</div>
+								</div>
+								<div class="Container100 Responsive100">
+									<div class="Container50 White Responsive50">
+										<p:outputLabel value="Prénom : " for="prenomLabel" />
+									</div>
+									<div class="Container50 White Responsive50">
+										<p:outputLabel id="prenomLabel"
+											value="#{accueilFacade.connetedUser.prenom}" />
+
+									</div>
+								</div>
+
+								<div class="Container100 Responsive100">
+									<div class="Container50 White Responsive50">
+										<p:outputLabel value="CIN : " for="cin" />
+									</div>
+									<div class="Container50 White Responsive50">
+										<p:outputLabel id="cin"
+											value="#{accueilFacade.connetedUser.cin}" />
+
+									</div>
+								</div>
+							</p:fieldset>
+							<p:fieldset legend="Connexion"
+								styleClass="Container40 Responsive100">
+								<div class="Container100 White Responsive100">
+									<div class="Container50 White Responsive50">
+										<p:outputLabel value="Nom d'utilisateur : " for="loginLabel" />
+									</div>
+									<div class="Container50 White Responsive50">
+
+										<p:outputLabel id="loginLabel"
+											value="#{accueilFacade.connetedUser.login}" />
+
+									</div>
+								</div>
+								<div class="Container100 White Responsive100">
+									<div class="Container50 White Responsive50">
+										<p:outputLabel value="Date de création : " for="dateCreation" />
+									</div>
+									<div class="Container50 White Responsive50">
+
+										<p:outputLabel id="dateCreation"
+											value="#{accueilFacade.connetedUser.dateCreation}">
+											<f:convertDateTime pattern="MM/dd/yyyy HH:mm" />
+										</p:outputLabel>
+									</div>
+								</div>
+
+								<div class="Container100 White Responsive100">
+									<div class="Container50 White Responsive50">
+										<p:outputLabel value="Date dernière connexion : "
+											for="lastdatelogin" />
+									</div>
+									<div class="Container50 White Responsive50">
+
+										<p:outputLabel id="lastdatelogin"
+											value="#{accueilFacade.connetedUser.dateLastLogin}">
+											<f:convertDateTime pattern="MM/dd/yyyy HH:mm" />
+										</p:outputLabel>
+
+									</div>
+								</div>
+							</p:fieldset>
+
+
+							<p:fieldset legend="Contacts"
+								styleClass="Container85 Responsive100">
+								<div class="Container100 Responsive100">
+									<div class="Container50 White Responsive50">
+										<p:outputLabel value="Email :" for="emailLabel" />
+									</div>
+									<div class="Container50 White Responsive50">
+										<p:outputLabel value="#{accueilFacade.connetedUser.email}"
+											id="emailLabel" />
+
+									</div>
+								</div>
+
+								<div class="Container100 White Responsive100">
+									<div class="Container50 White Responsive50">
+										<p:outputLabel value="Téléphone : " for="telephoneLabel" />
+									</div>
+									<div class="Container50 White Responsive50">
+
+										<p:outputLabel id="telephoneLabel"
+											value="#{accueilFacade.connetedUser.tel}" />
+
+									</div>
+								</div>
+
+							</p:fieldset>
+
+							<p:fieldset legend="Autre" styleClass="Container85 Responsive100">
+								<div class="Container100 Responsive100">
+									<div class="Container50 White Responsive50">
+										<p:outputLabel value="Profil :" for="myProfil" />
+									</div>
+									<div class="Container50 White Responsive50">
+										<p:outputLabel
+											value="#{accueilFacade.connetedUser.profil.codProfil}"
+											id="myProfil" />
+
+									</div>
+								</div>
+
+								<div class="Container100 White Responsive100">
+									<div class="Container50 White Responsive50">
+										<p:outputLabel value="Marque : " for="myMarque" />
+									</div>
+									<div class="Container50 White Responsive50">
+
+										<p:outputLabel id="myMarque"
+											value="#{accueilFacade.connetedUser.marque.libelle}" />
+
+									</div>
+								</div>
+
+							</p:fieldset>
+
+
+
+
+
+
+
+
+
+
+							<div class="EmptyBox10 Container100 Responsive100"></div>
+
+							<div class="Container90 Responsive100">
+								<p:commandButton id="Modif" value="Modifier"
+									oncomplete="PF('dlg').show();" styleClass="Fright" />
+
+
+							</div>
+						</h:panelGroup>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+
+
+
+
+		<ui:include src="/pages/profil/form.xhtml"></ui:include>
+
+
+	</ui:define>
+
+
+</ui:composition>

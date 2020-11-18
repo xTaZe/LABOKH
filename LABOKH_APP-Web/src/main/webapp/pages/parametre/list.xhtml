@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+
+	<p:dataTable id="singleDT" reflow="true" rows="5"
+		value="#{parametreBean.parametres}" var="parametre" paginator="true"
+		paginatorPosition="bottom"
+		emptyMessage="No records found with given criteria">
+		<f:facet name="header">PARAMETRE
+<!-- 		  <p:button icon="fa fa-twitter Fs16 White"/> -->
+			<p:commandButton icon="fa fa-plus Fs16 White"
+				styleClass="BlueTextButton RaisedButton" style="float:right"
+				action="#{parametreBean.nouveauEnregistrement()}"
+				update=":mainForm:PGADD"
+				oncomplete="initPop();PF('ParamAjout').show()" process="@this" />
+
+		</f:facet>
+		<p:column headerText="Id Paramètre">
+			<h:outputText value="#{parametre.idParametre}" />
+		</p:column>
+		<p:column headerText="Nom de société">
+			<h:outputText value="#{parametre.nomSociete}" />
+		</p:column>
+		<p:column headerText="FAX">
+			<h:outputText value="#{parametre.fax}" />
+		</p:column>
+		<p:column headerText="E-MAIL">
+			<h:outputText value="#{parametre.email}" />
+		</p:column>
+		<p:column headerText="Téléphone">
+			<h:outputText value="#{parametre.tel}" />
+		</p:column>
+		<p:column headerText="Adresse">
+			<h:outputText value="#{parametre.adresse}" />
+		</p:column>
+		<p:column headerText="Etat">
+			<p:row rendered="#{parametre.factif eq true}">
+				<p:column>
+					<h:outputText value="Actif" />
+				</p:column>
+			</p:row>
+			<p:row rendered="#{parametre.factif eq false}">
+				<p:column>
+					<h:outputText value="Inactif" />
+				</p:column>
+			</p:row>
+		</p:column>
+
+		<p:column width="120" headerText="Actions" id="ParametreAction"
+			style="text-align:center;">
+			<p:commandButton id="Editer" icon="fa  fa-pencil"
+				action="#{parametreBean.editEnregistrement()}"
+				update=":mainForm:PGADD" oncomplete="PF('ParamAjout').show();"
+				title="Editer" process="@this">
+				<f:setPropertyActionListener value="#{parametre}"
+					target="#{parametreBean.parametre}" />
+			</p:commandButton>
+			<p:row rendered="#{parametre.factif eq true}">
+				<p:commandButton title="Désactiver Paramètre"
+					action="#{parametreBean.activerDesactiver()}" immediate="true"
+					icon="fa  fa-check" update=":mainForm:singleDT">
+					<p:confirm header="Message de confirmation" icon="fa fa-check" />
+					<f:setPropertyActionListener value="#{parametre}"
+						target="#{parametreBean.parametre}" />
+				</p:commandButton>
+			</p:row>
+			<p:row rendered="#{parametre.factif eq false}">
+				<p:commandButton title="Activer Paramètre"
+					action="#{parametreBean.activerDesactiver()}" immediate="true"
+					icon="fa  fa-close" update=":mainForm:singleDT">
+					<p:confirm header="Message de confirmation" icon="fa fa-check" />
+					<f:setPropertyActionListener value="#{parametre}"
+						target="#{parametreBean.parametre}" />
+				</p:commandButton>
+			</p:row>
+
+
+		</p:column>
+	</p:dataTable>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+		<f:facet name="message">
+			<h:outputText
+				value="vous êtes sur le point de changer l'état du paramètre  ! &lt;br/&gt;  êtes vous sûr?"
+				escape="false" />
+		</f:facet>
+
+		<p:commandButton value="oui" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+		<p:commandButton value="non" type="button"
+			styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	</p:confirmDialog>
+	<script>
+		function initPop() {
+			$(this).closest('form').find("input[type=text], textarea").val("");
+		}
+	</script>
+
+
+</ui:composition>

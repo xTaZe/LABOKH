@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+	<div>
+		<h:panelGroup>
+			<p:fieldset legend="Fiche profil" style="font-size:11px;" id="fiche">
+				<p:panelGrid>
+					<h:panelGrid columns="2" width="100%">
+						<p:outputLabel value="libellé : " for="codProfil"
+							styleClass="my-label-gs" />
+						<p:inputText id="codProfil" value="#{profilBean.profil.codProfil}"
+							styleClass="no-radius" required="true"
+							requiredMessage="Ce champ est obligatoire : veuillez inscrire le code profil.">
+							<f:validateLength minimum="1" maximum="100" />
+<!-- 							<p:ajax event="change" listener="#{profilBean.verifcode()}" -->
+<!-- 								update=" addLcde codProfil :mainForm:growl " /> -->
+						</p:inputText>
+						<p:outputLabel value="Description : " for="desc"
+							styleClass="my-label-gs" />
+						<p:inputText id="desc" value="#{profilBean.profil.desProfil}"
+							styleClass="no-radius">
+							<f:validateLength minimum="0" maximum="50" />
+						</p:inputText>
+						<p:message for="desc" />
+					</h:panelGrid>
+				</p:panelGrid>
+				<p:separator />
+				<p:commandButton id="addLcde" value="Enregistrer"
+					action="#{profilBean.saveEnregistrement()}"
+					oncomplete="handleLoginRequest(xhr, status, args)"
+					update=":mainForm:fr :mainForm:growl" icon="ui-icon-plusthick">
+				</p:commandButton>
+				<p:commandButton value="Annuler" icon="ui-icon-arrowreturnthick-1-s"
+					process="@this" immediate="true" onclick="PF('aj').hide();" />
+			</p:fieldset>
+		</h:panelGroup>
+	</div>
+</ui:composition>
+

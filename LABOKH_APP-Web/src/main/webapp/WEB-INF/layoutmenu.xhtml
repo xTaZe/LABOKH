@@ -1,0 +1,130 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+	<div class="Animated05" id="layout-menu-cover">
+		<h:form id="profilForm">
+			<h:panelGroup id="profil">
+				<ul class="layout-menu">
+
+					<li><a class="menulink ripplelink"> <i
+							class="icon-round58 Fs40"></i> <span class="Fs18"> <i
+								class="icon-downwards Fright Fs20"></i>#{accueilFacade.connetedUser.nom}
+								#{accueilFacade.connetedUser.prenom} <br /> <span
+								class="Fs12 FontRobotoLight">#{accueilFacade.connetedUser.profil.desProfil}</span>
+						</span>
+					</a>
+						<ul>
+							<li><h:commandLink action="#{accueilFacade.editProfil()}"
+									class="menulink ripplelink">
+									<i class="icon-user158 Fs16"></i> Mon Profil</h:commandLink></li>
+							<li><a
+								href="${request.contextPath}/j_spring_security_logout"
+								class="menulink ripplelink"><i class="icon-thermostat1 Fs16"></i>
+									Se déconnecter</a></li>
+						</ul></li>
+
+				</ul>
+			</h:panelGroup>
+		</h:form>
+		<div class="Separator"></div>
+		<h:form id="menuForm">
+			<pr:menu>
+
+				<p:menuitem id="accueil" value="Accueil" icon="icon-planet29"
+					action="#{mouvementUserBean.Home()}" />
+
+
+				<p:menuitem id="accueil22" value="Factures" icon="icon-planet29"
+					action="#{verificationFactureBean.init()}" />
+
+
+				<sec:authorize
+					access="hasAnyRole('ROLE_DIRECTION','ROLE_PR','ROLE_SERVICE')">
+					<p:submenu id="carte_client" label="Nos cartes clients"
+						icon="icon-screen47">
+
+						<p:menuitem id="carte_fidelite" value="Gestion Cartes Fidélité"
+							icon="icon-shared1" action="#{compteFidBean.init()}" />
+						<sec:authorize access="hasAnyRole('ROLE_DIRECTION')">
+
+							<p:menuitem id="reporting" value="Reporting"
+								icon="icon-timelapse" />
+						</sec:authorize>
+
+					</p:submenu>
+				</sec:authorize>
+
+				<sec:authorize access="hasAnyRole('ROLE_DIRECTION')">
+					<p:submenu id="clients" label="Clients" icon="icon-copy31">
+						<p:menuitem id="mes_client" value="Nos clients" icon="icon-good4"
+							action="#{clientsBean.init()}" />
+						<p:menuitem value="Historique des SMS " action="#{smsBean.init()}"
+							icon="icon-screen45" />
+					</p:submenu>
+				</sec:authorize>
+
+
+				<sec:authorize
+					access="hasAnyRole('ROLE_DIRECTION','ROLE_TECHNIQUE')">
+					<p:submenu id="users" label="Gestion des utilisateurs"
+						styleClass="Fs16" icon="icon-users25">
+
+						<p:menuitem id="utilisateurs" value="Gestion Utilisateurs"
+							icon="icon-add184" action="#{utilisateurBean.init()}" />
+
+						<p:menuitem id="profils" value="Gestion Profils"
+							icon="icon-user158" action="#{profilBean.init()}" />
+						<p:menuitem id="journaux" value="Gestion journaux"
+							icon="icon-user158" action="#{journalBean.init()}" />
+					</p:submenu>
+				</sec:authorize>
+
+
+
+
+				<sec:authorize access="hasAnyRole('ROLE_DIRECTION')">
+					<p:submenu id="parametrage" label="Paramétrage"
+						icon="icon-settings50">
+						<p:menuitem id="parametre" value="Paramètres"
+							icon="icon-settings49" action="#{parametreBean.init()}" />
+						<p:menuitem id="parametres_coefficients" value="intervalle/Coef"
+							icon="icon-shuffle24" action="#{coefIntervaleBean.init()}" />
+						<p:menuitem id="pack_compte" value="Pack Compte"
+							icon="icon-snake4" action="#{packCompteBean.init()}" />
+						<p:menuitem id="pack_fidelite" value="Pack Fidélité"
+							icon="icon-snake4" action="#{packCadeauBean.init()}" />
+						<!-- 					<p:menuitem id="marques" value="Marques" icon="icon-nfc1" -->
+						<!-- 						action="#{marquesBean.init()}" /> -->
+					</p:submenu>
+				</sec:authorize>
+				<sec:authorize access="hasAnyRole('ROLE_TECHNIQUE')">
+					<p:submenu id="parametrageTechnique" label="Paramétrage technique"
+						icon="icon-settings50">
+						<p:menuitem id="parametreMAIL" value="Paramètres MAIL"
+							icon="icon-settings49" action="#{parametreMailBean.init()}" />
+						<p:menuitem id="parametreSMS" value="Paramètres SMS"
+							icon="icon-settings49" action="#{smsParametreBean.init()}" />
+
+						<!-- 					<p:menuitem id="marques" value="Marques" icon="icon-nfc1" -->
+						<!-- 						action="#{marquesBean.init()}" /> -->
+					</p:submenu>
+				</sec:authorize>
+
+				<p:separator />
+			</pr:menu>
+			<!-- <div class="ContainerIndent Fs12 BoldGray FontRobotoRegular"
+				style="position: fixed; bottom: 0 ; text-align: center; width: 10%;">
+				<div class="EmptyBox10"></div>
+				<i class="icon-mountains14 Fs16 Fleft Red"></i> Groupe ADAMING 2015 &copy; All rights reserved.
+				<div class="EmptyBox10"></div>
+			</div> -->
+		</h:form>
+
+
+	</div>
+
+</ui:composition>

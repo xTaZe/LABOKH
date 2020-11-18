@@ -1,0 +1,112 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<p:dialog header="Détails Paramètres Mail" widgetVar="ParamAjout"
+		modal="true" responsive="true" width="60%">
+		<div id="wrapper">
+			<div id="wrapperIndent">
+				<div class="Responsive100 Container100">
+					<h:panelGroup id="PGADD">
+
+						<div class="Container100 White Responsive100">
+							<div class="Container30 White Responsive50">
+								<p:outputLabel for="host" value="Hôte :" />
+							</div>
+							<div class="Container70 White Responsive50">
+								<p:inputText id="host" class="Container70"
+									value="#{parametreMailBean.parametreMail.host}"
+									placeholder="Adresse hôte..." required="true"
+									requiredMessage="Veuillez saisir l'adresse hôte">
+									<f:validateLength minimum="5" maximum="50" />
+								</p:inputText>
+							</div>
+						</div>
+						<div class="EmptyBox5 Container100 White Responsive100"></div>
+						<div class="Container100 White Responsive100">
+							<div class="Container30 White Responsive50">
+								<p:outputLabel for="login" value="Nom Utilisateur / Mail :" />
+							</div>
+							<div class="Container70 White Responsive50">
+								<p:inputText id="login" class="Container70"
+									value="#{parametreMailBean.parametreMail.login}"
+									placeholder="Nom d'utilisateur ou mail..." required="true"
+									requiredMessage="Veuillez saisir le nom d'utilisateur ou le mail">
+								</p:inputText>
+							</div>
+						</div>
+						<div class="EmptyBox5 Container100 White Responsive100"></div>
+						<div class="Container100 White Responsive100">
+							<div class="Container30 White Responsive50">
+								<p:outputLabel for="mdp" value="Mot de passe:" />
+							</div>
+							<div class="Container70 White Responsive50">
+								<p:inputText id="mdp" class="Container70"
+									value="#{parametreMailBean.parametreMail.motDePasse}"
+									placeholder="Mot de passe..." required="true"
+									requiredMessage="Veuillez saisir le mot de passe">
+								</p:inputText>
+							</div>
+						</div>
+						<!-- 						<div class="EmptyBox10 Container100 White Responsive100"></div> -->
+						<!-- 						<div class="EmptyBox5 Container100 White Responsive100"></div> -->
+						<!-- 						<div class="Container100 White Responsive100"> -->
+						<!-- 							<div class="Container30 White Responsive50"> -->
+						<!-- 								<p:outputLabel for="SCHEDULE" value="Fréquence exécution:" /> -->
+						<!-- 							</div> -->
+						<!-- 							<div class="Container70 White Responsive50"> -->
+						<!-- 								<p:spinner id="SCHEDULE" class="Container70" -->
+						<!-- 									value="#{parametreMailBean.parametreMail.batchSchedule}" -->
+						<!-- 									placeholder="Temps de planification..." required="true" -->
+						<!-- 									requiredMessage="Veuillez saisir la fréquence d'exécution de batch" /> -->
+						<!-- 							</div> -->
+						<!-- 						</div> -->
+						<div class="EmptyBox10 Container100 White Responsive100"></div>
+						<div class="EmptyBox5 Container100 White Responsive100"></div>
+						<div class="Container100 White Responsive100">
+							<div class="Container30 White Responsive50">
+								<p:outputLabel for="job" value="Temps entre envoi:" />
+							</div>
+							<div class="Container70 White Responsive50">
+								<p:spinner id="job" class="Container70"
+									value="#{parametreMailBean.parametreMail.jobSleep}"
+									placeholder="Temps de repos..." required="true"
+									requiredMessage="Veuillez saisir le temps de repos entre les mails" />
+							</div>
+						</div>
+						<div class="EmptyBox10 Container100 White Responsive100"></div>
+					</h:panelGroup>
+				</div>
+
+				<p:separator />
+				<div class="Container100 White Responsive100">
+					<p:commandButton id="addLcde" value="Enregistrer"
+						action="#{parametreMailBean.saveEnregistrement()}"
+						update=":mainForm:PGADD :mainForm:growl mainForm:singleDT"
+						icon="ui-icon-plusthick"
+						onstart="PF('blockUIWidgetfiche').block()"
+						oncomplete="PF('blockUIWidgetfiche').unblock();handleLoginRequest(xhr, status, args);" />
+
+					<p:commandButton value="Annuler" immediate="true"
+						icon="ui-icon-arrowreturnthick-1-s"
+						onclick="PF('ParamAjout').hide();" />
+					<p:messages></p:messages>
+					<pe:blockUI target=":mainForm:PGADD" widgetVar="blockUIWidgetfiche">
+						<h:panelGrid columns="2">
+							<h:graphicImage library="imggif" name="ajax-loader.gif"
+								value="ajax-loader1.gif"
+								style="margin-right: 12px; vertical-align: middle;" />
+							<h:outputText value="chargement en en cours..."
+								style="white-space: nowrap;" />
+						</h:panelGrid>
+					</pe:blockUI>
+
+				</div>
+
+			</div>
+		</div>
+	</p:dialog>
+</ui:composition>

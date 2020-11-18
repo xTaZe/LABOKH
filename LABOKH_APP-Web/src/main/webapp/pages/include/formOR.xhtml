@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pr="http://primefaces.org/rio">
+
+	<div class="Responsive100 Container100">
+		<h:panelGroup id="dashficheOR">
+			<p:fieldset legend="Nouveau Numéro Ordre de réparation">
+				<div class="Container100 White Responsive100">
+					<div class="Container33 White Responsive50">
+						<p:outputLabel value="N° Ordre de Réparation :" />
+					</div>
+					<div class="Container50 White Responsive50">
+						<p:inputText value="#{mouvementUserBean.numOR}"
+							styleClass="Container70" required="true"
+							requiredMessage="Veuillez saisir le numéro de OR.">
+							<f:validateLength minimum="3" maximum="50" />
+						</p:inputText>
+					</div>
+				</div>
+				<div class="EmptyBox20 Container100 White Responsive100"></div>
+				<div class="Container100 White Responsive100 ">
+					<p:commandButton value="Ajouter numéro OR"
+						action="#{mouvementUserBean.ajouternumOR()}"
+						update=":mainForm:middleBox :mainForm:growl" icon="fa fa-plus"
+						styleClass="Fright Fs18" />
+				</div>
+				<div class="EmptyBox5 Container100 White Responsive100"></div>
+			</p:fieldset>
+		</h:panelGroup>
+	</div>
+
+
+	<div class="EmptyBox20 Container100 White Responsive100"></div>
+</ui:composition>
