@@ -21,7 +21,7 @@
 									</div>
 									<div class="Container50 White Responsive50">
 										<p:outputLabel id="nomLabel"
-											value="#{accueilFacade.connetedUser.nom}" />
+											value="#{accueilFacade.connectedUser.nom}" />
 									</div>
 								</div>
 								<div class="Container100 Responsive100">
@@ -30,7 +30,7 @@
 									</div>
 									<div class="Container50 White Responsive50">
 										<p:outputLabel id="prenomLabel"
-											value="#{accueilFacade.connetedUser.prenom}" />
+											value="#{accueilFacade.connectedUser.prenom}" />
 
 									</div>
 								</div>
@@ -41,7 +41,7 @@
 									</div>
 									<div class="Container50 White Responsive50">
 										<p:outputLabel id="cin"
-											value="#{accueilFacade.connetedUser.cin}" />
+											value="#{accueilFacade.connectedUser.cin}" />
 
 									</div>
 								</div>
@@ -55,7 +55,7 @@
 									<div class="Container50 White Responsive50">
 
 										<p:outputLabel id="loginLabel"
-											value="#{accueilFacade.connetedUser.login}" />
+											value="#{accueilFacade.connectedUser.login}" />
 
 									</div>
 								</div>
@@ -66,7 +66,7 @@
 									<div class="Container50 White Responsive50">
 
 										<p:outputLabel id="dateCreation"
-											value="#{accueilFacade.connetedUser.dateCreation}">
+											value="#{accueilFacade.connectedUser.dateCreation}">
 											<f:convertDateTime pattern="MM/dd/yyyy HH:mm" />
 										</p:outputLabel>
 									</div>
@@ -80,7 +80,7 @@
 									<div class="Container50 White Responsive50">
 
 										<p:outputLabel id="lastdatelogin"
-											value="#{accueilFacade.connetedUser.dateLastLogin}">
+											value="#{accueilFacade.connectedUser.dateLastLogin}">
 											<f:convertDateTime pattern="MM/dd/yyyy HH:mm" />
 										</p:outputLabel>
 
@@ -96,7 +96,7 @@
 										<p:outputLabel value="Email :" for="emailLabel" />
 									</div>
 									<div class="Container50 White Responsive50">
-										<p:outputLabel value="#{accueilFacade.connetedUser.email}"
+										<p:outputLabel value="#{accueilFacade.connectedUser.email}"
 											id="emailLabel" />
 
 									</div>
@@ -109,7 +109,7 @@
 									<div class="Container50 White Responsive50">
 
 										<p:outputLabel id="telephoneLabel"
-											value="#{accueilFacade.connetedUser.tel}" />
+											value="#{accueilFacade.connectedUser.tel}" />
 
 									</div>
 								</div>
@@ -123,23 +123,13 @@
 									</div>
 									<div class="Container50 White Responsive50">
 										<p:outputLabel
-											value="#{accueilFacade.connetedUser.profil.codProfil}"
+											value="#{accueilFacade.connectedUser.profil.codProfil}"
 											id="myProfil" />
 
 									</div>
 								</div>
 
-								<div class="Container100 White Responsive100">
-									<div class="Container50 White Responsive50">
-										<p:outputLabel value="Marque : " for="myMarque" />
-									</div>
-									<div class="Container50 White Responsive50">
-
-										<p:outputLabel id="myMarque"
-											value="#{accueilFacade.connetedUser.marque.libelle}" />
-
-									</div>
-								</div>
+								
 
 							</p:fieldset>
 

@@ -24,10 +24,6 @@ import com.fr.adaming.jsfapp.services.IUtilisateurService;
 import com.fr.adaming.jsfapp.utils.EnvoiMailUtil;
 import com.fr.adaming.jsfapp.utils.lmd5;
 
-/**
- * @author cdridi
- *
- */
 @ManagedBean
 @Controller("mailBean")
 @Scope("session")
@@ -50,10 +46,8 @@ public class MailBean {
 
 		if (userExiste == null) {
 
-			FacesContext.getCurrentInstance().addMessage(
-					"form:email",
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"adresse mail invalide Veuillez vérifier votre addresse", "mail inexistant"));
+			FacesContext.getCurrentInstance().addMessage("form:email", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"adresse mail invalide Veuillez vérifier votre addresse", "mail inexistant"));
 			return null;
 		}
 
@@ -63,7 +57,7 @@ public class MailBean {
 			String password = nextSessionId();
 			userExiste.setToken(token);
 			userExiste.setPassword(lmd5.md5(password));
-			userService.saveOrUpdateService(userExiste, null);
+			userService.saveOrUpdateService(userExiste);
 			try {
 
 				String content = " Ce lien est utilisable une seul fois ";
@@ -71,10 +65,9 @@ public class MailBean {
 				String subject = "Cliquer sur ce lien afin de réinitialiser votre mot de passe. " + lien;
 				EnvoiMailUtil.envoiMail(userExiste.getEmail(), " Initialisation de mot de passe ", subject, content);
 
-				FacesContext.getCurrentInstance().addMessage(
-						"form:email",
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notification", "Utilisateur "
-								+ userExiste.getLogin() + " s'il vous plait ouvrir votre boite mail "));
+				FacesContext.getCurrentInstance().addMessage("form:email",
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notification",
+								"Utilisateur " + userExiste.getLogin() + " s'il vous plait ouvrir votre boite mail "));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -89,7 +82,7 @@ public class MailBean {
 			if (pwd1.equals(pwd2) & validatePassWord() & validateConfirmPassWord()) {
 				userInitPassword.setPassword(lmd5.md5(pwd1));
 				userInitPassword.setToken(null);
-				userService.saveOrUpdateService(userInitPassword, null);
+				userService.saveOrUpdateService(userInitPassword);
 
 				return "/login.jsf";
 			}
@@ -109,8 +102,8 @@ public class MailBean {
 			if (!pwd1.equals(pwd2)) {
 				FacesContext context = FacesContext.getCurrentInstance();
 
-				context.addMessage("nodouble", new FacesMessage(FacesMessage.SEVERITY_ERROR, "",
-						"Ces mots de passes ne correspondent pas."));
+				context.addMessage("nodouble",
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Ces mots de passes ne correspondent pas."));
 				return false;
 			}
 		}

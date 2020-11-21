@@ -20,7 +20,7 @@
 							</div>
 							<div class="Container50 White Responsive50">
 
-								<p:inputText id="nom" value="#{accueilFacade.connetedUser.nom}"
+								<p:inputText id="nom" value="#{accueilFacade.connectedUser.nom}"
 									required="true"
 									requiredMessage="Ce champ est obligatoire : veuillez inscrire votre nom.">
 									<f:validateLength minimum="5" maximum="50" />
@@ -38,7 +38,7 @@
 							</div>
 							<div class="Container50 White Responsive50">
 								<p:inputText id="prenom"
-									value="#{accueilFacade.connetedUser.prenom}" required="true"
+									value="#{accueilFacade.connectedUser.prenom}" required="true"
 									requiredMessage="Ce champ est obligatoire : veuillez inscrire votre prenom .">
 									<f:validateLength minimum="5" maximum="50" />
 								</p:inputText>
@@ -53,7 +53,7 @@
 								<p:outputLabel value="Email :" for="email" />
 							</div>
 							<div class="Container50 White Responsive50">
-								<p:inputText value="#{accueilFacade.connetedUser.email}"
+								<p:inputText value="#{accueilFacade.connectedUser.email}"
 									required="true"
 									requiredMessage="Ce champ est obligatoire : veuillez inscrire votre adresse courriel."
 									validatorMessage="Veuillez entrer une addresse électronique valide !"
@@ -75,7 +75,7 @@
 							<div class="Container50 White Responsive50">
 
 								<p:inputText id="login"
-									value="#{accueilFacade.connetedUser.login}"
+									value="#{accueilFacade.connectedUser.login}"
 									styleClass="no-radius" required="true"
 									requiredMessage="Ce champ est obligatoire : veuillez inscrire votre login.">
 									<f:validateLength minimum="5" maximum="50" />
@@ -94,7 +94,7 @@
 							<div class="Container50 White Responsive50">
 
 								<p:inputText id="telephone"
-									value="#{accueilFacade.connetedUser.tel}"
+									value="#{accueilFacade.connectedUser.tel}"
 									styleClass="no-radius" required="true"
 									requiredMessage="Ce champ est obligatoire : veuillez inscrire votre numéro de téléphone .">
 									<f:validateLength minimum="5" maximum="50" />

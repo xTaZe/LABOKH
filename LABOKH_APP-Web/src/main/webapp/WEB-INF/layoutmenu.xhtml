@@ -12,9 +12,9 @@
 
 					<li><a class="menulink ripplelink"> <i
 							class="icon-round58 Fs40"></i> <span class="Fs18"> <i
-								class="icon-downwards Fright Fs20"></i>#{accueilFacade.connetedUser.nom}
-								#{accueilFacade.connetedUser.prenom} <br /> <span
-								class="Fs12 FontRobotoLight">#{accueilFacade.connetedUser.profil.desProfil}</span>
+								class="icon-downwards Fright Fs20"></i>#{accueilFacade.connectedUser.nom}
+								#{accueilFacade.connectedUser.prenom} <br /> <span
+								class="Fs12 FontRobotoLight">#{accueilFacade.connectedUser.profil.desProfil}</span>
 						</span>
 					</a>
 						<ul>
@@ -34,42 +34,30 @@
 		<h:form id="menuForm">
 			<pr:menu>
 
-				<p:menuitem id="accueil" value="Accueil" icon="icon-planet29"
-					action="#{mouvementUserBean.Home()}" />
+				<p:menuitem id="accueil" value="Utilisateurs" icon="icon-planet29"
+					action="#{utilisateurBean.init()}" />
 
 
 				<p:menuitem id="accueil22" value="Automates" icon="icon-planet29"
-					action="#{verificationFactureBean.init()}" />
+					action="#" />
 
 
-				<sec:authorize
-					access="hasAnyRole('ROLE_DIRECTION','ROLE_PR','ROLE_SERVICE')">
-					<p:submenu id="carte_client" label="Nos cartes clients"
-						icon="icon-screen47">
+<!-- 				<sec:authorize -->
+<!-- 					access="hasAnyRole('ROLE_DIRECTION','ROLE_PR','ROLE_SERVICE')"> -->
+<!-- 					<p:submenu id="carte_client" label="Nos cartes clients" -->
+<!-- 						icon="icon-screen47"> -->
 
-						<p:menuitem id="carte_fidelite" value="Gestion Cartes Fidélité"
-							icon="icon-shared1" action="#{compteFidBean.init()}" />
-						<sec:authorize access="hasAnyRole('ROLE_DIRECTION')">
+<!-- 						<p:menuitem id="carte_fidelite" value="Gestion Cartes Fidélité" -->
+<!-- 							icon="icon-shared1" action="#{compteFidBean.init()}" /> -->
+<!-- 						<sec:authorize access="hasAnyRole('ROLE_DIRECTION')"> -->
 
-							<p:menuitem id="reporting" value="Reporting"
-								icon="icon-timelapse" />
-						</sec:authorize>
+<!-- 							<p:menuitem id="reporting" value="Reporting" -->
+<!-- 								icon="icon-timelapse" /> -->
+<!-- 						</sec:authorize> -->
 
-					</p:submenu>
-				</sec:authorize>
+<!-- 					</p:submenu> -->
+<!-- 				</sec:authorize> -->
 
-				<sec:authorize access="hasAnyRole('ROLE_TECHNIQUE')">
-					<p:submenu id="parametrageTechnique" label="Paramétrage technique"
-						icon="icon-settings50">
-						<p:menuitem id="parametreMAIL" value="Paramètres MAIL"
-							icon="icon-settings49" action="#{parametreMailBean.init()}" />
-						<p:menuitem id="parametreSMS" value="Paramètres SMS"
-							icon="icon-settings49" action="#{smsParametreBean.init()}" />
-
-						<!-- 					<p:menuitem id="marques" value="Marques" icon="icon-nfc1" -->
-						<!-- 						action="#{marquesBean.init()}" /> -->
-					</p:submenu>
-				</sec:authorize>
 
 				<p:separator />
 			</pr:menu>
