@@ -140,34 +140,14 @@
 								<f:selectItem itemLabel="..." itemValue=""
 									noSelectionOption="true" />
 								<f:selectItems value="#{utilisateurBean.profils}" var="p"
-									itemLabel="#{p.codProfil}" itemValue="#{p}" />
+									itemLabel="#{p.desProfil}" itemValue="#{p}" />
 								<p:column>
 									<p:outputLabel value="#{t.desProfil} " />
 								</p:column>
 							</p:selectOneMenu>
 						</div>
 					</div>
-					<div class="Container50 White Responsive100">
-						<div class="Container50 White Responsive100">
-							<p:outputLabel for="marque" value="   Marque :"
-								style="width:155px " styleClass="my-label-gs" />
-						</div>
-						<div class="Container50 White Responsive100">
-							<p:selectOneMenu id="marque" style="width:105px "
-								value="#{utilisateurBean.utilisateur.marque}"
-								converter="entityConverter" effect="fade" var="t" filter="true"
-								filterMatchMode="startsWith" required="false"
-								requiredMessage="Ce champ est obligatoire : veuillez sélectionner la marque.">
-								<f:selectItem itemLabel="..." itemValue=""
-									noSelectionOption="true" />
-								<f:selectItems value="#{utilisateurBean.marques}" var="p"
-									itemLabel="#{p.libelle}" itemValue="#{p}" />
-								<p:column>
-									<p:outputLabel value="#{t.libelle} " />
-								</p:column>
-							</p:selectOneMenu>
-						</div>
-					</div>
+					<div class="Container50 White Responsive100"></div>
 				</div>
 				<div class="EmptyBox10 Container100 White Responsive100"></div>
 				<div class="Container100 White Responsive100">

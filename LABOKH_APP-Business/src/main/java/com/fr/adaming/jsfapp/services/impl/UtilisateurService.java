@@ -35,7 +35,6 @@ public class UtilisateurService extends ManagerService<Utilisateur> implements I
 			return utilisateur;
 		}
 		return null;
-
 	}
 
 	@Override

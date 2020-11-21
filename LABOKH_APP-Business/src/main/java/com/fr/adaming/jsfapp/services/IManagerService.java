@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.hibernate.Query;
 
-import com.fr.adaming.jsfapp.model.Journal;
-
 public interface IManagerService<T> {
 
 	/**
@@ -17,7 +15,7 @@ public interface IManagerService<T> {
 	 *            le journal
 	 * @return retourner l'entité créée ou modifiée
 	 */
-	T saveOrUpdateService(T entity, Journal journal);
+	T saveOrUpdateService(T entity);
 
 	/**
 	 * cette méthode consiste à supprimer une entité
@@ -27,7 +25,7 @@ public interface IManagerService<T> {
 	 * @param journal
 	 *            le journal
 	 */
-	void deleteService(T entity, Journal journal);
+	void deleteService(T entity);
 
 	/**
 	 * cette méthode consiste à récupérer une entité à partir de son identifiant
@@ -40,7 +38,7 @@ public interface IManagerService<T> {
 	 *            le journal
 	 * @return retourner l'entité récupérée à patir de son identifiant
 	 */
-	T findByIDService(Class<?> clazz, Long id, Journal journal);
+	T findByIDService(Class<?> clazz, Long id);
 
 	/**
 	 * cette méthode consiste à récupérer une entité à partir d'une requete SQL
@@ -51,7 +49,7 @@ public interface IManagerService<T> {
 	 *            le journal
 	 * @return retourner l'entité récupérée à partir de la requete entrée
 	 */
-	T findOneService(String query, Journal journal);
+	T findOneService(String query);
 
 	/**
 	 * cette méthode consiste à récupérer une liste d'enregistrement d'une
@@ -64,7 +62,7 @@ public interface IManagerService<T> {
 	 * @return retourner la liste d'enregistrement d'une entité à partir de la
 	 *         requete entrée
 	 */
-	List<T> findManyService(Query query, Journal journal);
+	List<T> findManyService(Query query);
 
 	/**
 	 * cette méthode consiste à récupérer tous les enregistrements de l'entité
@@ -77,7 +75,7 @@ public interface IManagerService<T> {
 	 * @return retourner la liste de tous les enregistrements de l'entité passée
 	 *         en paramètre
 	 */
-	List<T> findAll(Class<?> clazz, Journal journal);
+	List<T> findAll(Class<?> clazz);
 
 	/**
 	 * cette méthode consiste à récupérer une entité à patir de la propriété et
@@ -93,6 +91,6 @@ public interface IManagerService<T> {
 	 */
 	T getEntityByProprety(Class<?> clazz, String proprety, String value);
 
-	void persist(T entity, Journal journal);
+	void persist(T entity);
 
 }

@@ -11,7 +11,8 @@ public class LoggerConfig {
 	private static final Logger logger = Logger.getLogger(LoggerConfig.class);
 
 	public void logEntry(JoinPoint joinPoint) {
-		log("Entering " + joinPoint.getTarget().getClass().getSimpleName() + " : " + joinPoint.getSignature().getName());
+		log("Entering " + joinPoint.getTarget().getClass().getSimpleName() + " : "
+				+ joinPoint.getSignature().getName());
 
 	}
 
@@ -20,7 +21,8 @@ public class LoggerConfig {
 			log("Return value :" + result);
 		}
 
-		log("Exiting  " + joinPoint.getTarget().getClass().getSimpleName() + " : " + joinPoint.getSignature().getName());
+		log("Exiting  " + joinPoint.getTarget().getClass().getSimpleName() + " : "
+				+ joinPoint.getSignature().getName());
 
 	}
 
@@ -32,7 +34,7 @@ public class LoggerConfig {
 	}
 
 	public static void log(String LogMessage) {
-		logger.info(LogMessage);
+		logger.debug(LogMessage);
 	}
 
 	public static void logError(String LogMessage) {

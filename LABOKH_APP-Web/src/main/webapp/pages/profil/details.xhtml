@@ -12,7 +12,7 @@
 				<h:panelGrid columns="4" width="100%">
 					<p:outputLabel value="Nom :" for="nom" styleClass="my-label-gs" />
 					<h:panelGrid columns="1">
-						<p:inputText id="nom" value="#{accueilFacade.connetedUser.nom}"
+						<p:inputText id="nom" value="#{accueilFacade.connectedUser.nom}"
 							styleClass="no-radius" required="true"
 							requiredMessage="Ce champ est obligatoire : veuillez inscrire votre nom.">
 							<f:validateLength minimum="5" maximum="50" />
@@ -25,7 +25,7 @@
 					<h:panelGrid columns="1">
 
 						<p:inputText id="prenom"
-							value="#{accueilFacade.connetedUser.prenom}"
+							value="#{accueilFacade.connectedUser.prenom}"
 							styleClass="no-radius" required="true"
 							requiredMessage="Ce champ est obligatoire : veuillez inscrire votre prenom .">
 							<f:validateLength minimum="5" maximum="50" />
@@ -35,7 +35,7 @@
 					<p:outputLabel value="Email :" styleClass="my-label-gs" for="email" />
 					<h:panelGrid columns="1">
 
-						<p:inputText value="#{accueilFacade.connetedUser.email}"
+						<p:inputText value="#{accueilFacade.connectedUser.email}"
 							required="true"
 							requiredMessage="Ce champ est obligatoire : veuillez inscrire votre adresse courriel."
 							validatorMessage="Veuillez entrer une addresse électronique valide !"
@@ -52,7 +52,7 @@
 					<h:panelGrid columns="1">
 
 						<p:inputText id="login"
-							value="#{accueilFacade.connetedUser.login}"
+							value="#{accueilFacade.connectedUser.login}"
 							styleClass="no-radius" required="true"
 							requiredMessage="Ce champ est obligatoire : veuillez inscrire votre login.">
 							<f:validateLength minimum="5" maximum="50" />
@@ -65,7 +65,7 @@
 						styleClass="my-label-gs" />
 					<h:panelGrid columns="1">
 						<p:inputText id="telephone"
-							value="#{accueilFacade.connetedUser.tel}" styleClass="no-radius"
+							value="#{accueilFacade.connectedUser.tel}" styleClass="no-radius"
 							required="true"
 							requiredMessage="Ce champ est obligatoire : veuillez inscrire votre numéro de téléphone .">
 							<f:validateLength minimum="5" maximum="50" />

@@ -7,9 +7,8 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import com.fr.adaming.jsfapp.dao.IManagerDao;
 import com.fr.adaming.dao.tools.HibernateUtil;
-import com.fr.adaming.jsfapp.model.Journal;
+import com.fr.adaming.jsfapp.dao.IManagerDao;
 
 /**
  * 
@@ -32,7 +31,7 @@ public class ManagerDao<T> extends HibernateUtil implements IManagerDao<T> {
 	 * @param journal
 	 *            le journal
 	 */
-	public void deleteFrom(String tableName, String iDName, Long idValue, Journal journal) {
+	public void deleteFrom(String tableName, String iDName, Long idValue) {
 
 		Session hibernateSession = this.getSession();
 		SQLQuery st = getSession().createSQLQuery("DELETE FROM " + tableName + " where " + iDName + " = " + idValue);
@@ -58,8 +57,7 @@ public class ManagerDao<T> extends HibernateUtil implements IManagerDao<T> {
 	 * @param journal
 	 *            le journal
 	 */
-	public void deleteFromComposedPK(String tableName, String pk1, Long valuePk1, String pk2, Long valuePk2,
-			Journal journal) {
+	public void deleteFromComposedPK(String tableName, String pk1, Long valuePk1, String pk2, Long valuePk2) {
 		Session hibernateSession = this.getSession();
 		SQLQuery st = getSession().createSQLQuery(
 				"DELETE FROM " + tableName + " where " + pk1 + " = " + valuePk1 + " and " + pk2 + " = " + valuePk2);
@@ -78,7 +76,7 @@ public class ManagerDao<T> extends HibernateUtil implements IManagerDao<T> {
 	 * @return retourner l'objet créé
 	 */
 	@SuppressWarnings("unchecked")
-	public T save(Object entity, Journal journal) {
+	public T save(Object entity) {
 		Session hibernateSession = this.getSession();
 		T newEntity = (T) hibernateSession.merge(entity);
 		hibernateSession.flush();
@@ -95,7 +93,7 @@ public class ManagerDao<T> extends HibernateUtil implements IManagerDao<T> {
 	 * @return retourner l'entité créée ou modifiée
 	 */
 	@SuppressWarnings("unchecked")
-	public T saveOrUpdate(T entity, Journal journal) {
+	public T saveOrUpdate(T entity) {
 		Session hibernateSession = this.getSession();
 		T newEntity = (T) hibernateSession.merge(entity);
 		hibernateSession.flush();
@@ -103,7 +101,7 @@ public class ManagerDao<T> extends HibernateUtil implements IManagerDao<T> {
 		return newEntity;
 	}
 
-	public void persist(T entity, Journal journal) {
+	public void persist(T entity) {
 		Session hibernateSession = this.getSession();
 		hibernateSession.persist(entity);
 		hibernateSession.flush();
@@ -118,7 +116,7 @@ public class ManagerDao<T> extends HibernateUtil implements IManagerDao<T> {
 	 * @param journal
 	 *            le journal
 	 */
-	public void delete(T entity, Journal journal) {
+	public void delete(T entity) {
 		Session hibernateSession = this.getSession();
 		hibernateSession.delete(entity);
 		hibernateSession.flush();
@@ -137,7 +135,7 @@ public class ManagerDao<T> extends HibernateUtil implements IManagerDao<T> {
 	 *         requete entrée
 	 */
 	@SuppressWarnings("unchecked")
-	public List<T> findMany(Query query, Journal journal) {
+	public List<T> findMany(Query query) {
 		List<T> t;
 		t = (List<T>) query.list();
 		return t;
@@ -153,7 +151,7 @@ public class ManagerDao<T> extends HibernateUtil implements IManagerDao<T> {
 	 * @return retourner l'entité récupérée à partir de la requete entrée
 	 */
 	@SuppressWarnings("unchecked")
-	public T findOne(String stringQuery, Journal journal) {
+	public T findOne(String stringQuery) {
 		Query query = getSession().createSQLQuery(stringQuery);
 		T t;
 		t = (T) query.uniqueResult();
@@ -172,7 +170,7 @@ public class ManagerDao<T> extends HibernateUtil implements IManagerDao<T> {
 	 * @return retourner l'entité récupérée à patir de son identifiant
 	 */
 	@SuppressWarnings("unchecked")
-	public T findByID(Class<?> clazz, Long id, Journal journal) {
+	public T findByID(Class<?> clazz, Long id) {
 		Session hibernateSession = this.getSession();
 		T t = null;
 		t = (T) hibernateSession.get(clazz, id);
@@ -191,7 +189,7 @@ public class ManagerDao<T> extends HibernateUtil implements IManagerDao<T> {
 	 *         en paramètre
 	 */
 	@SuppressWarnings("unchecked")
-	public List<T> findAll(Class<?> clazz, Journal journal) {
+	public List<T> findAll(Class<?> clazz) {
 		Session hibernateSession = this.getSession();
 		List<T> t = null;
 		Query query = hibernateSession.createQuery("from " + clazz.getName());
@@ -216,8 +214,8 @@ public class ManagerDao<T> extends HibernateUtil implements IManagerDao<T> {
 	public T getEntityByProprety(Class<?> clazz, String proprety, String value) {
 
 		Session hibernateSession = this.getSession();
-		Query query = hibernateSession.createQuery("from " + clazz.getName() + " where lower(" + proprety + ")='"
-				+ value.toLowerCase() + "'");
+		Query query = hibernateSession.createQuery(
+				"from " + clazz.getName() + " where lower(" + proprety + ")='" + value.toLowerCase() + "'");
 		T t;
 		t = (T) query.uniqueResult();
 		return t;

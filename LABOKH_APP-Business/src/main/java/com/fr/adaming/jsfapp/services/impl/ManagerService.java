@@ -6,7 +6,6 @@ import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.fr.adaming.jsfapp.model.Journal;
 import com.fr.adaming.jsfapp.services.IManagerService;
 
 public class ManagerService<T> implements IManagerService<T> {
@@ -24,13 +23,13 @@ public class ManagerService<T> implements IManagerService<T> {
 	 *            le journal
 	 * @return retourner l'entité créée ou modifiée
 	 */
-	public T saveOrUpdateService(T entity, Journal journal) {
-		return managerDao.saveOrUpdate(entity, journal);
+	public T saveOrUpdateService(T entity) {
+		return managerDao.saveOrUpdate(entity);
 
 	}
 
-	public void persist(T entity, Journal journal) {
-		managerDao.persist(entity, journal);
+	public void persist(T entity) {
+		managerDao.persist(entity);
 	}
 
 	/**
@@ -41,8 +40,8 @@ public class ManagerService<T> implements IManagerService<T> {
 	 * @param journal
 	 *            le journal
 	 */
-	public void deleteService(T entity, Journal journal) {
-		managerDao.delete(entity, journal);
+	public void deleteService(T entity) {
+		managerDao.delete(entity);
 	}
 
 	/**
@@ -56,9 +55,9 @@ public class ManagerService<T> implements IManagerService<T> {
 	 *            le journal
 	 * @return retourner l'entité récupérée à patir de son identifiant
 	 */
-	public T findByIDService(Class<?> clazz, Long id, Journal journal) {
+	public T findByIDService(Class<?> clazz, Long id) {
 
-		return managerDao.findByID(clazz, id, journal);
+		return managerDao.findByID(clazz, id);
 	}
 
 	/**
@@ -70,8 +69,8 @@ public class ManagerService<T> implements IManagerService<T> {
 	 *            le journal
 	 * @return retourner l'entité récupérée à partir de la requete entrée
 	 */
-	public T findOneService(String query, Journal journal) {
-		return managerDao.findOne(query, journal);
+	public T findOneService(String query) {
+		return managerDao.findOne(query);
 	}
 
 	/**
@@ -85,9 +84,9 @@ public class ManagerService<T> implements IManagerService<T> {
 	 * @return retourner la liste d'enregistrement d'une entité à partir de la
 	 *         requete entrée
 	 */
-	public List<T> findManyService(Query query, Journal journal) {
+	public List<T> findManyService(Query query) {
 
-		return managerDao.findMany(query, journal);
+		return managerDao.findMany(query);
 	}
 
 	/**
@@ -101,8 +100,8 @@ public class ManagerService<T> implements IManagerService<T> {
 	 * @return retourner la liste de tous les enregistrements de l'entité passée
 	 *         en paramètre
 	 */
-	public List<T> findAll(Class<?> clazz, Journal journal) {
-		return managerDao.findAll(clazz, journal);
+	public List<T> findAll(Class<?> clazz) {
+		return managerDao.findAll(clazz);
 	}
 
 	/**

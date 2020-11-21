@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.hibernate.Query;
 
-import com.fr.adaming.jsfapp.model.Journal;
-
 public interface IManagerDao<T> {
 
 	/**
@@ -17,9 +15,9 @@ public interface IManagerDao<T> {
 	 *            le journal
 	 * @return retourner l'entité créée ou modifiée
 	 */
-	T saveOrUpdate(T entity, Journal journal);
+	T saveOrUpdate(T entity);
 
-	void persist(T entity, Journal journal);
+	void persist(T entity);
 
 	/**
 	 * cette méthode consiste à supprimer une entité
@@ -29,7 +27,7 @@ public interface IManagerDao<T> {
 	 * @param journal
 	 *            le journal
 	 */
-	void delete(T entity, Journal journal);
+	void delete(T entity);
 
 	/**
 	 * cette méthode consiste à récupérer une liste d'enregistrement d'une
@@ -42,7 +40,7 @@ public interface IManagerDao<T> {
 	 * @return retourner la liste d'enregistrement d'une entité à partir de la
 	 *         requete entrée
 	 */
-	List<T> findMany(Query query, Journal journal);
+	List<T> findMany(Query query);
 
 	/**
 	 * cette méthode consiste à récupérer une entité à partir d'une requete SQL
@@ -53,7 +51,7 @@ public interface IManagerDao<T> {
 	 *            le journal
 	 * @return retourner l'entité récupérée à partir de la requete entrée
 	 */
-	T findOne(String stringQuery, Journal journal);
+	T findOne(String stringQuery);
 
 	/**
 	 * cette méthode consiste à récupérer une entité à partir de son identifiant
@@ -66,7 +64,7 @@ public interface IManagerDao<T> {
 	 *            le journal
 	 * @return retourner l'entité récupérée à patir de son identifiant
 	 */
-	T findByID(Class<?> clazz, Long id, Journal journal);
+	T findByID(Class<?> clazz, Long id);
 
 	/**
 	 * cette méthode consiste à récupérer tous les enregistrements de l'entité
@@ -79,7 +77,7 @@ public interface IManagerDao<T> {
 	 * @return retourner la liste de tous les enregistrements de l'entité passée
 	 *         en paramètre
 	 */
-	List<T> findAll(Class<?> clazz, Journal journal);
+	List<T> findAll(Class<?> clazz);
 
 	/**
 	 * cette méthode permet de créer l'objet passé en paramètre
@@ -90,7 +88,7 @@ public interface IManagerDao<T> {
 	 *            le journal
 	 * @return retourner l'objet créé
 	 */
-	T save(Object o, Journal journal);
+	T save(Object o);
 
 	/**
 	 * cette méthode consiste à supprimer les enregistrements d'une table en
@@ -105,7 +103,7 @@ public interface IManagerDao<T> {
 	 * @param journal
 	 *            le journal
 	 */
-	void deleteFrom(String tableName, String iDName, Long idValue, Journal journal);
+	void deleteFrom(String tableName, String iDName, Long idValue);
 
 	/**
 	 * cette méthode consiste à supprimer les enregistrement d'une table en
@@ -124,7 +122,7 @@ public interface IManagerDao<T> {
 	 * @param journal
 	 *            le journal
 	 */
-	void deleteFromComposedPK(String tableName, String pk1, Long valuePk1, String pk2, Long valuePk2, Journal journal);
+	void deleteFromComposedPK(String tableName, String pk1, Long valuePk1, String pk2, Long valuePk2);
 
 	/**
 	 * cette méthode consiste à récupérer une entité à patir de la propriété et

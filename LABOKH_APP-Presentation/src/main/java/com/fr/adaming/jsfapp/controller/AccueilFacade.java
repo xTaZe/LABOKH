@@ -35,7 +35,7 @@ public class AccueilFacade implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Utilisateur utilisateur;
-	public Utilisateur connetedUser;
+	public Utilisateur connectedUser;
 
 	private String userConnectedName;
 	private String host;
@@ -72,12 +72,12 @@ public class AccueilFacade implements Serializable {
 	public void createJournalObjectSession() {
 
 		messageBundle = ResourceBundle.getBundle("MessageResource");
-		connetedUser = new Utilisateur();
-		connetedUser = utilisateurService.findByLoginPass(springSecurityUser.getUsername(),
+		connectedUser = new Utilisateur();
+		connectedUser = utilisateurService.findByLoginPass(springSecurityUser.getUsername(),
 				springSecurityUser.getPassword());
 
-		connetedUser.setDateLastLogin(new Date());
-		utilisateurService.saveOrUpdateService(connetedUser, journal);
+		connectedUser.setDateLastLogin(new Date());
+		utilisateurService.saveOrUpdateService(connectedUser);
 
 		journal = new Journal();
 
@@ -87,7 +87,7 @@ public class AccueilFacade implements Serializable {
 		String host = request.getRemoteHost();
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 				.getRequest();
-		journal.setUtilisateur(connetedUser);
+		journal.setUtilisateur(connectedUser);
 		journal.setLastConnDate(new Date());
 		journal.setTimeaction(new Date());
 		String browserType = (String) req.getHeader("User-Agent");
@@ -116,12 +116,12 @@ public class AccueilFacade implements Serializable {
 	}
 
 	public String saveProfil() {
-		if (connetedUser != null) {
+		if (connectedUser != null) {
 			// oldPassword = lmd5.md5(oldPassword);
-			if (connetedUser.getPassword().equals(oldPassword)) {
+			if (connectedUser.getPassword().equals(oldPassword)) {
 				// Password2 = lmd5.md5(Password2);
-				connetedUser.setPassword(Password2);
-				utilisateurService.saveOrUpdateService(connetedUser, journal);
+				connectedUser.setPassword(Password2);
+				utilisateurService.saveOrUpdateService(connectedUser);
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Mot de passe incorrect"));
@@ -187,12 +187,12 @@ public class AccueilFacade implements Serializable {
 		this.host = host;
 	}
 
-	public Utilisateur getConnetedUser() {
-		return connetedUser;
+	public Utilisateur getconnectedUser() {
+		return connectedUser;
 	}
 
-	public void setConnetedUser(Utilisateur connetedUser) {
-		this.connetedUser = connetedUser;
+	public void setconnectedUser(Utilisateur connectedUser) {
+		this.connectedUser = connectedUser;
 	}
 
 	public Journal getJournal() {
