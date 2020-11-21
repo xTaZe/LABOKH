@@ -10,12 +10,6 @@ public interface IConstants {
 		String dbPwd = "";
 	}
 
-	interface NatureMouvement {
-		String facture = "Facture";
-		String conversion = "Conversion";
-
-	}
-
 	interface UpladImage {
 		/*
 		 * Après la modification des ces deux champs dans server.xml <host> ...

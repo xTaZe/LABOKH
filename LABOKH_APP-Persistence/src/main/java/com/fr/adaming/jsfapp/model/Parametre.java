@@ -4,12 +4,9 @@ package com.fr.adaming.jsfapp.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fr.adaming.jsfapp.utils.IConstants;
@@ -26,7 +23,6 @@ public class Parametre implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = -218041372982824910L;
 	private long idParametre;
-	private Marque marque;
 	private String adresse;
 	private String email;
 	private String tel;
@@ -37,20 +33,20 @@ public class Parametre implements java.io.Serializable {
 	public Parametre() {
 	}
 
-	public Parametre(long idParametre) {
+	public Parametre(long idParametre, String adresse, String email, String tel, String fax, String nomSociete,
+			Boolean factif) {
+		super();
 		this.idParametre = idParametre;
-	}
-
-	public Parametre(long idParametre, Marque marque, String adresse, String email, String tel, String fax,
-			String nomSociete, Boolean factif) {
-		this.idParametre = idParametre;
-		this.marque = marque;
 		this.adresse = adresse;
 		this.email = email;
 		this.tel = tel;
 		this.fax = fax;
 		this.nomSociete = nomSociete;
 		this.factif = factif;
+	}
+
+	public Parametre(long idParametre) {
+		this.idParametre = idParametre;
 	}
 
 	@Id
@@ -62,16 +58,6 @@ public class Parametre implements java.io.Serializable {
 
 	public void setIdParametre(long idParametre) {
 		this.idParametre = idParametre;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_MARQUE")
-	public Marque getMarque() {
-		return this.marque;
-	}
-
-	public void setMarque(Marque marque) {
-		this.marque = marque;
 	}
 
 	@Column(name = "ADRESSE", length = 254)

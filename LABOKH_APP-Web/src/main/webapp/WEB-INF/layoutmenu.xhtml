@@ -38,7 +38,7 @@
 					action="#{mouvementUserBean.Home()}" />
 
 
-				<p:menuitem id="accueil22" value="Factures" icon="icon-planet29"
+				<p:menuitem id="accueil22" value="Automates" icon="icon-planet29"
 					action="#{verificationFactureBean.init()}" />
 
 
@@ -58,49 +58,6 @@
 					</p:submenu>
 				</sec:authorize>
 
-				<sec:authorize access="hasAnyRole('ROLE_DIRECTION')">
-					<p:submenu id="clients" label="Clients" icon="icon-copy31">
-						<p:menuitem id="mes_client" value="Nos clients" icon="icon-good4"
-							action="#{clientsBean.init()}" />
-						<p:menuitem value="Historique des SMS " action="#{smsBean.init()}"
-							icon="icon-screen45" />
-					</p:submenu>
-				</sec:authorize>
-
-
-				<sec:authorize
-					access="hasAnyRole('ROLE_DIRECTION','ROLE_TECHNIQUE')">
-					<p:submenu id="users" label="Gestion des utilisateurs"
-						styleClass="Fs16" icon="icon-users25">
-
-						<p:menuitem id="utilisateurs" value="Gestion Utilisateurs"
-							icon="icon-add184" action="#{utilisateurBean.init()}" />
-
-						<p:menuitem id="profils" value="Gestion Profils"
-							icon="icon-user158" action="#{profilBean.init()}" />
-						<p:menuitem id="journaux" value="Gestion journaux"
-							icon="icon-user158" action="#{journalBean.init()}" />
-					</p:submenu>
-				</sec:authorize>
-
-
-
-
-				<sec:authorize access="hasAnyRole('ROLE_DIRECTION')">
-					<p:submenu id="parametrage" label="Paramétrage"
-						icon="icon-settings50">
-						<p:menuitem id="parametre" value="Paramètres"
-							icon="icon-settings49" action="#{parametreBean.init()}" />
-						<p:menuitem id="parametres_coefficients" value="intervalle/Coef"
-							icon="icon-shuffle24" action="#{coefIntervaleBean.init()}" />
-						<p:menuitem id="pack_compte" value="Pack Compte"
-							icon="icon-snake4" action="#{packCompteBean.init()}" />
-						<p:menuitem id="pack_fidelite" value="Pack Fidélité"
-							icon="icon-snake4" action="#{packCadeauBean.init()}" />
-						<!-- 					<p:menuitem id="marques" value="Marques" icon="icon-nfc1" -->
-						<!-- 						action="#{marquesBean.init()}" /> -->
-					</p:submenu>
-				</sec:authorize>
 				<sec:authorize access="hasAnyRole('ROLE_TECHNIQUE')">
 					<p:submenu id="parametrageTechnique" label="Paramétrage technique"
 						icon="icon-settings50">
@@ -116,12 +73,12 @@
 
 				<p:separator />
 			</pr:menu>
-			<!-- <div class="ContainerIndent Fs12 BoldGray FontRobotoRegular"
+		 <div class="ContainerIndent Fs12 BoldGray FontRobotoRegular"
 				style="position: fixed; bottom: 0 ; text-align: center; width: 10%;">
 				<div class="EmptyBox10"></div>
-				<i class="icon-mountains14 Fs16 Fleft Red"></i> Groupe ADAMING 2015 &copy; All rights reserved.
+				<i class="fa-fw Fs16 Fleft Red"></i> Laboratoire Houda KHEDHRI
 				<div class="EmptyBox10"></div>
-			</div> -->
+			</div> 
 		</h:form>
 
 

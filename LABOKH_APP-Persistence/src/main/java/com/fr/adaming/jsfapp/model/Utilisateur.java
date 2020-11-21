@@ -33,7 +33,6 @@ public class Utilisateur implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 4015507800701915928L;
 	private long idUser;
-	private Marque marque;
 	private Profil profil;
 	private Date dateCreation;
 	private Date dateLastLogin;
@@ -46,8 +45,8 @@ public class Utilisateur implements java.io.Serializable {
 	private String email;
 	private String token;
 	private Boolean FActif;
-	private Set<MouvementFid> mouvementFids = new HashSet<MouvementFid>(0);
-	private Set<Journal> journals = new HashSet<Journal>(0);
+	private Set<Journal> journals = new HashSet<>();
+	private Set<Automate> automates = new HashSet<>();
 
 	public Utilisateur() {
 	}
@@ -56,11 +55,11 @@ public class Utilisateur implements java.io.Serializable {
 		this.idUser = idUser;
 	}
 
-	public Utilisateur(long idUser, Marque marque, Profil profil, Date dateCreation, Date dateLastLogin, String login,
-			String nom, String cin, String password, String prenom, String tel, String email, Boolean FActif,
-			Set<MouvementFid> mouvementFids, Set<Journal> journals) {
+	public Utilisateur(long idUser, Profil profil, Date dateCreation, Date dateLastLogin, String login, String nom,
+			String cin, String password, String prenom, String tel, String email, String token, Boolean fActif,
+			Set<Journal> journals) {
+		super();
 		this.idUser = idUser;
-		this.marque = marque;
 		this.profil = profil;
 		this.dateCreation = dateCreation;
 		this.dateLastLogin = dateLastLogin;
@@ -71,8 +70,8 @@ public class Utilisateur implements java.io.Serializable {
 		this.prenom = prenom;
 		this.tel = tel;
 		this.email = email;
-		this.FActif = FActif;
-		this.mouvementFids = mouvementFids;
+		this.token = token;
+		FActif = fActif;
 		this.journals = journals;
 	}
 
@@ -85,16 +84,6 @@ public class Utilisateur implements java.io.Serializable {
 
 	public void setIdUser(long idUser) {
 		this.idUser = idUser;
-	}
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ID_MARQUE")
-	public Marque getMarque() {
-		return this.marque;
-	}
-
-	public void setMarque(Marque marque) {
-		this.marque = marque;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -209,21 +198,21 @@ public class Utilisateur implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "utilisateur")
-	public Set<MouvementFid> getMouvementFids() {
-		return this.mouvementFids;
-	}
-
-	public void setMouvementFids(Set<MouvementFid> mouvementFids) {
-		this.mouvementFids = mouvementFids;
-	}
-
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "utilisateur")
 	public Set<Journal> getJournals() {
 		return this.journals;
 	}
 
 	public void setJournals(Set<Journal> journals) {
 		this.journals = journals;
+	}
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "utilisateur")
+	public Set<Automate> getAutomates() {
+		return automates;
+	}
+
+	public void setAutomates(Set<Automate> automates) {
+		this.automates = automates;
 	}
 
 }

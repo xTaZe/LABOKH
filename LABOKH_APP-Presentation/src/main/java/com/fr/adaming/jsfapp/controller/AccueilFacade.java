@@ -22,7 +22,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 
 import com.fr.adaming.jsfapp.model.Journal;
-import com.fr.adaming.jsfapp.model.RefPoint;
 import com.fr.adaming.jsfapp.model.Utilisateur;
 import com.fr.adaming.jsfapp.services.IUtilisateurService;
 
@@ -47,7 +46,6 @@ public class AccueilFacade implements Serializable {
 	private Collection<GrantedAuthority> listRole;
 	private boolean[] tabApplication;
 	private ResourceBundle messageBundle;
-	private RefPoint refPoint;
 
 	private String Password;
 	private String Password2;
@@ -235,14 +233,6 @@ public class AccueilFacade implements Serializable {
 
 	public void setOldPassword(String oldPassword) {
 		this.oldPassword = oldPassword;
-	}
-
-	public RefPoint getRefPoint() {
-		return refPoint;
-	}
-
-	public void setRefPoint(RefPoint refPoint) {
-		this.refPoint = refPoint;
 	}
 
 }
