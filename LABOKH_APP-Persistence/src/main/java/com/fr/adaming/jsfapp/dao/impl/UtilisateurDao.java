@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -13,11 +14,6 @@ import com.fr.adaming.jsfapp.dto.ObjectSearchUtilisateur;
 import com.fr.adaming.jsfapp.model.Journal;
 import com.fr.adaming.jsfapp.model.Utilisateur;
 
-/**
- * 
- * @author Khaled BRAHIM
- *
- */
 @Repository("utilisateurDao")
 public class UtilisateurDao extends ManagerDao<Utilisateur> implements IUtilisateurDao {
 
@@ -37,6 +33,7 @@ public class UtilisateurDao extends ManagerDao<Utilisateur> implements IUtilisat
 			if (os.getToken() != null)
 				criteria.add(Restrictions.eq("token", os.getToken()));
 		}
+		criteria.addOrder(Order.asc(os.getNom()));
 		return criteria.list();
 
 	}

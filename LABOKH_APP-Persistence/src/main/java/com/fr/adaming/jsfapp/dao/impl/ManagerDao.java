@@ -12,7 +12,6 @@ import com.fr.adaming.jsfapp.dao.IManagerDao;
 
 /**
  * 
- * @author Khaled BRAHIM
  *
  */
 @Repository("managerDao")

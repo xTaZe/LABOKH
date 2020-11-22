@@ -13,11 +13,6 @@ import com.fr.adaming.jsfapp.dao.IJournalDao;
 import com.fr.adaming.jsfapp.dto.ObjectSearchJournal;
 import com.fr.adaming.jsfapp.model.Journal;
 
-/**
- * 
- * @author Khaled BRAHIM
- *
- */
 @Repository("journalDao")
 public class JournalDao extends ManagerDao<Journal> implements IJournalDao {
 

@@ -4980,7 +4980,6 @@ hr.ui-widget-header {
 }
 /*Style For UI Growl Item ------------------------------------------------------------------------------------- */
 .ui-growl {
-	/* khaled modif*/
 	/*   width: 200px !important; */
 	right: 12px !important;
 	top: 70px !important;
@@ -5000,7 +4999,6 @@ hr.ui-widget-header {
 }
 
 .ui-growl-message {
-	/* khaled modif*/
 	/*   width: 100px !important; */
 	font-size: 16px !important;
 	line-height: 16px !important;
