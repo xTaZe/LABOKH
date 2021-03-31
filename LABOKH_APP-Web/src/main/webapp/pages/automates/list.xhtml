@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+	<div>
+		<div>
+			<p:fieldset legend="Liste des Automates " style="font-size:11px;"
+				id="fiche">
+				<h:panelGrid columns="1">
+				
+					<p:dataTable value="#{automateBean.automates}" var="a" rows="10"
+						paginator="true" paginatorPosition="bottom"
+						emptyMessage="Aucun enregistrement trouvé. " widgetVar="table"
+						id="tb" reflow="true"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15,20">
+						
+						<f:facet name="header">
+				GESTION DES AUTOMATES
+					<p:commandButton icon="fa fa-plus Fs16 White"
+						styleClass="BlueTextButton RaisedButton" style="float:right"
+						immediate="true"
+						action="#{automateBean.nouveauEnregistrement()}"
+						oncomplete="PF('dlg3').show()" process="@this" update=":mainForm" />
+					<div style="clear: both" />
+				</f:facet>
+
+						<div style="clear: both" />
+
+
+						<p:column headerText="id Automate" width="100">
+							<h:outputText value="#{a.idAutomate}">
+							</h:outputText>
+						</p:column>
+						
+						<p:column headerText="Code automate" width="100">
+							<h:outputText value="#{a.codeAutomate}">
+
+							</h:outputText>
+						</p:column>
+						<p:column headerText="nom automate" width="100">
+							<h:outputText value="#{a.nomAutomate}">
+
+							</h:outputText>
+						</p:column>
+						
+					</p:dataTable>
+				</h:panelGrid>
+			</p:fieldset>
+
+
+		</div>
+	</div>
+
+</ui:composition>

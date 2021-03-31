@@ -1,0 +1,131 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+	<style>
+.ui-selectonemenu {
+	width: 50% !important;
+}
+
+/* .ui-selectonemenu-label { */
+/* 	width: 100% !important; */
+/* } */
+</style>
+
+	<h:panelGroup>
+		<p:fieldset legend="Fiche réactif" style="font-size:11px;" id="field">
+			<div class="Container100 White Responsive100">
+				<div class="Container100 White Responsive100">
+					<div class="Container50 White Responsive100">
+						<div class="Container50 White Responsive100">
+							<p:outputLabel value="Code :" for="nom" styleClass="my-label-gs" />
+						</div>
+						<div class="Container50 White Responsive100">
+							<p:inputText id="nom" value="#{reactifBean.reactif.codeReactif}"
+								styleClass="no-radius" required="true"
+								validatorMessage="Veuillez saisir un libellé valide."
+								requiredMessage="Ce champ est obligatoire : veuillez inscrire un nom à l'automate.">
+								<f:validateLength minimum="1" maximum="50" />
+							</p:inputText>
+						</div>
+					</div>
+					<div class="Container50 White Responsive100">
+						<div class="Container50 White Responsive100">
+							<p:outputLabel value="Description  : " for="code"
+								styleClass="my-label-gs" />
+						</div>
+						<div class="Container50 White Responsive100">
+							<p:inputText id="code" value="#{reactifBean.reactif.descReactif}"
+								validatorMessage="Veuillez saisir un code valide."
+								styleClass="no-radius" required="true"
+								requiredMessage="Ce champ est obligatoire : veuillez inscrire le code.">
+								<f:validateLength minimum="1" maximum="50" />
+							</p:inputText>
+						</div>
+
+
+					</div>
+					<div class="Container50 White Responsive100">
+						<div class="Container50 White Responsive100">
+							<p:outputLabel value="Dte de premption  : " for="codea"
+								styleClass="my-label-gs" />
+						</div>
+						<div class="Container50 White Responsive100">
+							<p:calendar id="codea"
+								value="#{reactifBean.reactif.dateDePreemption}"
+								validatorMessage="Veuillez saisir un code valide."
+								styleClass="no-radius" required="true"
+								requiredMessage="Ce champ est obligatoire : veuillez inscrire le code.">
+								<f:validateLength minimum="1" maximum="50" />
+							</p:calendar>
+						</div>
+
+
+					</div>
+					<div class="Container50 White Responsive100">
+						<div class="Container50 White Responsive100">
+							<p:outputLabel value="Dte de fin d'utilisation  : " for="codeb"
+								styleClass="my-label-gs" />
+						</div>
+						<div class="Container50 White Responsive100">
+							<p:calendar id="codeb"
+								value="#{reactifBean.reactif.dateFinUtilisation}"
+								validatorMessage="Veuillez saisir un code valide."
+								styleClass="no-radius" required="true"
+								requiredMessage="Ce champ est obligatoire : veuillez inscrire le code.">
+								<f:validateLength minimum="1" maximum="50" />
+							</p:calendar>
+						</div>
+					</div>
+
+					<div class="Container50 White Responsive100">
+						<div class="Container50 White Responsive100">
+							<p:outputLabel value="Dte de fin d'ouverture  : " for="dateouv"
+								styleClass="my-label-gs" />
+						</div>
+						<div class="Container50 White Responsive100">
+							<p:calendar id="dateouv"
+								value="#{reactifBean.reactif.dateOuverture}"
+								validatorMessage="Veuillez saisir un code valide."
+								styleClass="no-radius" required="true"
+								requiredMessage="Ce champ est obligatoire : veuillez inscrire le code.">
+								<f:validateLength minimum="1" maximum="50" />
+							</p:calendar>
+						</div>
+					</div>
+
+					<div class="Container50 White Responsive100">
+						<div class="Container50 White Responsive100">
+							<p:outputLabel value="Partage  : " for="part"
+								styleClass="my-label-gs" />
+						</div>
+						<div class="Container50 White Responsive100">
+							<p:selectBooleanCheckbox value="#{reactifBean.reactif.isPartage}"
+								id="part" itemLabel="Partage" />
+						</div>
+					</div>
+
+				</div>
+
+
+
+
+				<div class="EmptyBox30 Container100 White Responsive100"></div>
+				<div class="Container100 White Responsive100 TexAlCenter">
+					<p:commandButton id="addLcde" value="Enregistrer"
+						action="#{reactifBean.saveEnregistrement}"
+						oncomplete="handleLoginRequest(xhr, status, args)"
+						update=" field :mainForm:growl :mainForm:middleBox:tb"
+						icon="fa fa-save">
+
+					</p:commandButton>
+					<p:commandButton value="Annuler" icon="fa fa-backward"
+						action="#{utilisateurBean.nouveauEnregistrement()}"
+						immediate="true" onclick="PF('dlg3').hide();" />
+				</div>
+			</div>
+		</p:fieldset>
+	</h:panelGroup>
+</ui:composition>

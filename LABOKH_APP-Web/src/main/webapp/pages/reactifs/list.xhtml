@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+	<div>
+		<div>
+			<p:fieldset legend="Liste des réactifs " style="font-size:11px;"
+				id="fiche">
+				<h:panelGrid columns="1">
+
+					<p:dataTable value="#{reactifBean.reactifs}" var="a" rows="10"
+						paginator="true" paginatorPosition="bottom"
+						emptyMessage="Aucun enregistrement trouvé. " widgetVar="table"
+						id="tb" reflow="true"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15,20">
+
+						<f:facet name="header">
+				GESTION DES REACTIFS
+					<p:commandButton icon="fa fa-plus Fs16 White"
+								styleClass="BlueTextButton RaisedButton" style="float:right"
+								immediate="true" action="#{reactifBean.nouveauEnregistrement()}"
+								oncomplete="PF('dlg3').show()" process="@this"
+								update=":mainForm" />
+							<div style="clear: both" />
+						</f:facet>
+
+						<div style="clear: both" />
+
+
+						<p:column headerText="Code" width="100">
+							<h:outputText value="#{a.codeReactif}">
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Description" width="100">
+							<h:outputText value="#{a.descReactif}">
+
+							</h:outputText>
+						</p:column>
+						<p:column headerText="date de prémption" width="100">
+							<h:outputText value="#{a.dateDePreemption}">
+
+							</h:outputText>
+						</p:column>
+						<p:column headerText="date de fin d'utilisation" width="100">
+							<h:outputText value="#{a.dateFinUtilisation}">
+
+							</h:outputText>
+						</p:column>
+						<p:column headerText="date d'ouverture" width="100">
+							<h:outputText value="#{a.dateOuverture}">
+
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Partage" width="100">
+							<h:outputText value="#{a.isPartage}">
+
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Labo" width="100">
+							<h:outputText value="#{a.nomLabo}">
+
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Quantité reçue" width="100">
+							<h:outputText value="#{a.quantiteRecu}">
+
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Quantité à céder" width="100">
+							<h:outputText value="#{a.quantiteAceder}">
+
+							</h:outputText>
+						</p:column>
+
+					</p:dataTable>
+				</h:panelGrid>
+			</p:fieldset>
+
+
+		</div>
+	</div>
+
+</ui:composition>

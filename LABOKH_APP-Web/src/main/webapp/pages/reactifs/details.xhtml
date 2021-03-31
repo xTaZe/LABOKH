@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rio">
+
+	<div>
+		<h:panelGroup>
+			<p:fieldset legend="Liste reactifs" style="font-size:11px;"
+				id="fiche">
+
+				<h:panelGrid columns="2" width="100%">
+					<p:outputLabel value="Code :" styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:outputLabel value="#{reactifBean.reactif.codeReactif}">
+
+						</p:outputLabel>
+					</h:panelGrid>
+					<p:outputLabel value="Desc :" styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:outputLabel value="#{reactifBean.reactif.descReactif}">
+
+						</p:outputLabel>
+					</h:panelGrid>
+					<p:outputLabel value="Adress Host :" styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:outputLabel value="#{journalBean.journal.zl1}">
+
+						</p:outputLabel>
+					</h:panelGrid>
+					<p:outputLabel value="Ip Host  :" styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:outputLabel value="#{journalBean.journal.zl2}">
+
+						</p:outputLabel>
+					</h:panelGrid>
+					<p:outputLabel value="Type action  :" styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:outputLabel value="#{journalBean.journal.actionDesc}">
+
+						</p:outputLabel>
+					</h:panelGrid>
+					<p:outputLabel value="date conect  :" styleClass="my-label-gs" />
+					<h:panelGrid columns="1">
+						<p:outputLabel value="#{journalBean.journal.lastConnDate}">
+
+						</p:outputLabel>
+					</h:panelGrid>
+				</h:panelGrid>
+				<p:commandButton value="Annuler" icon="ui-icon-arrowreturnthick-1-s"
+					process="@this" onclick="PF('smsdetail').hide();" />
+			</p:fieldset>
+		</h:panelGroup>
+	</div>
+
+</ui:composition>

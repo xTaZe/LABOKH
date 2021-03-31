@@ -11,14 +11,14 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.fr.adaming.jsfapp.controller.SuperFacade;
-import com.fr.adaming.jsfapp.model.Automate;
-import com.fr.adaming.jsfapp.services.IAutomateService;
+import com.fr.adaming.jsfapp.model.Reactif;
+import com.fr.adaming.jsfapp.services.IReactifService;
 import com.fr.adaming.jsfapp.util.IBean;
 
 @ManagedBean
-@Controller("automateBean")
+@Controller("reactifBean")
 @Scope("session")
-public class AutomateBean extends SuperFacade implements IBean {
+public class ReactifBean extends SuperFacade implements IBean {
 
 	/**
 	 *
@@ -26,20 +26,20 @@ public class AutomateBean extends SuperFacade implements IBean {
 	private static final long serialVersionUID = -5649605117843320597L;
 
 	@Autowired(required = true)
-	private IAutomateService automateService;
+	private IReactifService reactifService;
 
-	private List<Automate> automates;
-	private Automate automate;
+	private List<Reactif> reactifs;
+	private Reactif reactif;
 
 	@PostConstruct
 	public String init() {
-		setAutomates(new ArrayList<>(automateService.findAll(Automate.class)));
-		return "/pages/automates/index.jsf?faces-redirect=true";
+		reactifs = (new ArrayList<>(reactifService.findAll(Reactif.class)));
+		return "/pages/reactifs/index.jsf?faces-redirect=true";
 	}
 
 	@Override
 	public String nouveauEnregistrement() {
-		this.automate = new Automate();
+		this.reactif = new Reactif();
 		return null;
 	}
 
@@ -69,24 +69,24 @@ public class AutomateBean extends SuperFacade implements IBean {
 
 	@Override
 	public String saveEnregistrement() {
-		automateService.saveOrUpdateService(automate);
+		reactifService.saveOrUpdateService(reactif);
 		return init();
 	}
 
-	public List<Automate> getAutomates() {
-		return automates;
+	public List<Reactif> getReactifs() {
+		return reactifs;
 	}
 
-	public void setAutomates(List<Automate> automates) {
-		this.automates = automates;
+	public void setReactifs(List<Reactif> reactifs) {
+		this.reactifs = reactifs;
 	}
 
-	public Automate getAutomate() {
-		return automate;
+	public Reactif getReactif() {
+		return reactif;
 	}
 
-	public void setAutomate(Automate automate) {
-		this.automate = automate;
+	public void setReactif(Reactif reactif) {
+		this.reactif = reactif;
 	}
 
 }

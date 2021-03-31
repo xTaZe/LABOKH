@@ -26,26 +26,32 @@ public class Automate {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idAutomate;
 
-	@Column
+	@Column(name = "CODE_AUTOMATE")
 	private String codeAutomate;
-	@Column
+	@Column(name = "NOM_AUTOMATE")
 	private String nomAutomate;
-	@Column
+	@Column(name = "FLAG_ACTIF")
 	private Boolean flagActif;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_USER")
 	private Utilisateur utilisateur;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "automate")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "automate")
 	private Set<Reactif> reactifs = new HashSet<>();
 
-	public Automate(long idAutomate, String codeAutomate, String nomAutomate, Boolean flagActif, Automate automate) {
+	public Automate(long idAutomate, String codeAutomate, String nomAutomate, Boolean flagActif,
+			Utilisateur utilisateur, Set<Reactif> reactifs) {
 		super();
 		this.idAutomate = idAutomate;
 		this.codeAutomate = codeAutomate;
 		this.nomAutomate = nomAutomate;
 		this.flagActif = flagActif;
+		this.utilisateur = utilisateur;
+		this.reactifs = reactifs;
+	}
+
+	public Automate() {
 	}
 
 	public long getIdAutomate() {

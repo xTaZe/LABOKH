@@ -57,7 +57,7 @@ public class Utilisateur implements java.io.Serializable {
 
 	public Utilisateur(long idUser, Profil profil, Date dateCreation, Date dateLastLogin, String login, String nom,
 			String cin, String password, String prenom, String tel, String email, String token, Boolean fActif,
-			Set<Journal> journals) {
+			Set<Journal> journals, Set<Automate> automates) {
 		super();
 		this.idUser = idUser;
 		this.profil = profil;
@@ -73,6 +73,7 @@ public class Utilisateur implements java.io.Serializable {
 		this.token = token;
 		FActif = fActif;
 		this.journals = journals;
+		this.automates = automates;
 	}
 
 	@Id
@@ -206,7 +207,7 @@ public class Utilisateur implements java.io.Serializable {
 		this.journals = journals;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "utilisateur")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "utilisateur")
 	public Set<Automate> getAutomates() {
 		return automates;
 	}
